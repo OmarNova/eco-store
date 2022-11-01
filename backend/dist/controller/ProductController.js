@@ -21,7 +21,15 @@ class ProductController {
     constructor() {
         this.index = (req, res) => res.json({ 'error': 0, 'msg': 'API: node-express-ts' });
         this.getProduct = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const product = yield this.model.getProducts().find();
+            const product = yield this.model.getProducts();
+            if (product) {
+                return res.send(product);
+            }
+            return res.json({ 'error': 1, 'msg': 'API: id no found' });
+        });
+        this.getProductPage = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const product = yield this.model.getProductsPage(parseInt(id));
             if (product) {
                 return res.send(product);
             }

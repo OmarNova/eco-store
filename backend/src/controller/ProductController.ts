@@ -17,7 +17,17 @@ class ProductController {
     public index = (req: Request, res: Response) => res.json({ 'error': 0, 'msg': 'API: node-express-ts' });
 
     public getProduct = async (req: Request, res: Response) => {
-        const product = await this.model.getProducts().find();
+        const product = await this.model.getProducts();
+
+        if (product) {
+            return res.send(product);
+        }
+        return res.json({ 'error': 1, 'msg': 'API: id no found' });
+    }
+
+    public getProductPage = async (req: Request, res: Response) => {
+        const { id } =  req.params;
+        const product = await this.model.getProductsPage(parseInt(id));
 
         if (product) {
             return res.send(product);

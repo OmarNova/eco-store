@@ -34,8 +34,31 @@ class ProductModel {
       });
     }
 
-    public getProducts = () => {
-        return model<IProduct>('products', this.productSchema);
+    public getProducts = async () => {
+        
+        const productModel = model<IProduct>('products', this.productSchema);
+        const product = await productModel.find();
+        return product
+    }
+
+    public getProductsPage = async (page: number) => {
+        
+        const productModel = model<IProduct>('products', this.productSchema);
+       
+        let final = page * 12;
+        let inicio = final-12;
+
+        if(page==1){
+            const product = await productModel.find().limit(12);
+            return product;
+        }else{
+            const product = await productModel.find().skip(inicio).limit(final);
+            return product;
+        }
+
+        return null;
+
+       
     }
 
 

@@ -10,6 +10,7 @@ class ProductRoute {
         this.config = () => {
             this.router.get('/', this.ProductController.index);
             this.router.get('/product/', this.ProductController.getProduct);
+            this.router.get('/product/:id', this.ProductController.getProductPage);
             this.router.get('/productImage/:id', this.ProductController.getImageProduct);
         };
         this.router = (0, express_1.Router)();
