@@ -20,10 +20,8 @@ class ProductController {
         const product = await this.model.getProducts().find();
 
         if (product) {
-            //return res.sendFile(ruta + 'index.html');
             return res.send(product);
         }
-        //return res.sendFile(ruta + 'index.html');
         return res.json({ 'error': 1, 'msg': 'API: id no found' });
     }
 
@@ -31,10 +29,8 @@ class ProductController {
         const { id } = req.params;
         const dir = path.join(__dirname, '../src-eco-store/' + id + '.jpg');
         if (fs.existsSync(dir)) {
-            //return res.sendFile(ruta + 'index.html');
             return res.sendFile(dir);
         }
-        //return res.sendFile(ruta + 'index.html');
         return res.json({ 'error': 1, 'msg': 'API: id no found' });
     }
 

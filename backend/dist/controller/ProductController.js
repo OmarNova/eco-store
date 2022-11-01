@@ -23,20 +23,16 @@ class ProductController {
         this.getProduct = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const product = yield this.model.getProducts().find();
             if (product) {
-                //return res.sendFile(ruta + 'index.html');
                 return res.send(product);
             }
-            //return res.sendFile(ruta + 'index.html');
             return res.json({ 'error': 1, 'msg': 'API: id no found' });
         });
         this.getImageProduct = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             const dir = path_1.default.join(__dirname, '../src-eco-store/' + id + '.jpg');
             if (fs_1.default.existsSync(dir)) {
-                //return res.sendFile(ruta + 'index.html');
                 return res.sendFile(dir);
             }
-            //return res.sendFile(ruta + 'index.html');
             return res.json({ 'error': 1, 'msg': 'API: id no found' });
         });
         mongoose_1.default.connect(config_1.default.DB.URI);
