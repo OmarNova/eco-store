@@ -1,10 +1,8 @@
-import { Double } from "mongodb";
-
-interface IProduct {
+export interface IProduct {
 
     nombre: string;
     contenido: string;
-    precio: Double;
+    precio: number;
     moneda: string;
     sale: string;
     img: string;

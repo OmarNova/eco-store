@@ -6,13 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const people_json_1 = __importDefault(require("../db/people.json"));
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
-const mongoose_1 = __importDefault(require("mongoose"));
+const product = require('./ProductModel');
 class BackendModel {
     constructor() {
-        this.test = () => {
-            const mongoDB = "mongodb://127.0.0.1/ecostore";
-            mongoose_1.default.connect(mongoDB);
-        };
         this.getPeopleByID = (id) => people_json_1.default[--id];
         this.insertPeople = (people) => {
             console.log(path_1.default.join(__dirname, 'db'));

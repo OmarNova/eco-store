@@ -2,7 +2,8 @@ import peoples from "../db/people.json";
 import { IPeople } from "interface/IPeople";
 import fs from "fs";
 import path from "path";
-import mongoose from "mongoose";
+const product = require('./ProductModel')
+
 
 class BackendModel {
 
@@ -10,11 +11,6 @@ class BackendModel {
       // TODO document why this constructor is empty
     }
 
-    public test = () =>{
-        const mongoDB = "mongodb://127.0.0.1/ecostore";
-        mongoose.connect(mongoDB);
-        
-    }
 
     public getPeopleByID = (id: number) => 
         peoples[--id]
