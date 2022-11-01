@@ -29,6 +29,12 @@ class ProductModel {
             const product = yield productModel.find();
             return product;
         });
+        this.getProductSearch = (consulta) => __awaiter(this, void 0, void 0, function* () {
+            const query = ".*" + consulta + "*.";
+            const productModel = (0, mongoose_1.model)('products', this.productSchema);
+            const product = yield productModel.find({ "nombre": { "$regex": query, "$options": "i" } });
+            return product;
+        });
         this.getProductsPage = (page) => __awaiter(this, void 0, void 0, function* () {
             const productModel = (0, mongoose_1.model)('products', this.productSchema);
             let final = page * 12;

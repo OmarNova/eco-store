@@ -18,7 +18,7 @@ class ProductController {
 
     public getProduct = async (req: Request, res: Response) => {
         const product = await this.model.getProducts();
-
+        console.log(req.query.name);
         if (product) {
             return res.send(product);
         }
@@ -28,6 +28,32 @@ class ProductController {
     public getProductPage = async (req: Request, res: Response) => {
         const { id } =  req.params;
         const product = await this.model.getProductsPage(parseInt(id));
+
+        if (product) {
+            return res.send(product);
+        }
+        return res.json({ 'error': 1, 'msg': 'API: id no found' });
+    }
+
+    public getProductRange = async (req: Request, res: Response) => {
+        const precio_inicial = req.query.priceinit;
+        const precio_final = req.query.pricefinal;
+        const product = await this.model.getProducts();
+
+        if (product) {
+            return res.send(product);
+        }
+        return res.json({ 'error': 1, 'msg': 'API: id no found' });
+    }
+
+    public getProductSearch = async (req: Request, res: Response) => {
+        const search = req.query.search as string;
+
+        if(!search){
+            return this.getProduct(req,res);
+        }
+        
+        const product = await this.model.getProductSearch(search);
 
         if (product) {
             return res.send(product);

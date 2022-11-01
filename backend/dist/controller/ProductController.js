@@ -22,6 +22,7 @@ class ProductController {
         this.index = (req, res) => res.json({ 'error': 0, 'msg': 'API: node-express-ts' });
         this.getProduct = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const product = yield this.model.getProducts();
+            console.log(req.query.name);
             if (product) {
                 return res.send(product);
             }
@@ -30,6 +31,26 @@ class ProductController {
         this.getProductPage = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             const product = yield this.model.getProductsPage(parseInt(id));
+            if (product) {
+                return res.send(product);
+            }
+            return res.json({ 'error': 1, 'msg': 'API: id no found' });
+        });
+        this.getProductRange = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const precio_inicial = req.query.priceinit;
+            const precio_final = req.query.pricefinal;
+            const product = yield this.model.getProducts();
+            if (product) {
+                return res.send(product);
+            }
+            return res.json({ 'error': 1, 'msg': 'API: id no found' });
+        });
+        this.getProductSearch = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const search = req.query.search;
+            if (!search) {
+                return this.getProduct(req, res);
+            }
+            const product = yield this.model.getProductSearch(search);
             if (product) {
                 return res.send(product);
             }

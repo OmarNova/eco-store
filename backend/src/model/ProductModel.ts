@@ -41,6 +41,15 @@ class ProductModel {
         return product
     }
 
+    public getProductSearch = async (consulta: string) => {
+        const query = ".*" + consulta + "*.";
+        const productModel = model<IProduct>('products', this.productSchema);
+        const product = await productModel.find({"nombre": {"$regex": query, "$options": "i"}});
+   
+        return product
+    }
+
+
     public getProductsPage = async (page: number) => {
         
         const productModel = model<IProduct>('products', this.productSchema);
@@ -55,10 +64,7 @@ class ProductModel {
             const product = await productModel.find().skip(inicio).limit(final);
             return product;
         }
-
         return null;
-
-       
     }
 
 
