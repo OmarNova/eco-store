@@ -1,5 +1,4 @@
 import express, { Application, json, urlencoded } from "express";
-import BackendRoute from "./route/BackendRoute"
 import ProductRoute from "./route/ProductRoute";
 import cors from 'cors';
 
@@ -7,12 +6,10 @@ import cors from 'cors';
 class Server {
 
     private backend: Application;
-    private backendRoute: BackendRoute;
     private productRoute: ProductRoute;
 
     constructor() {
         this.backend = express();
-        this.backendRoute = new BackendRoute();
         this.productRoute = new ProductRoute();
         this.config();
         this.route();
@@ -27,7 +24,6 @@ class Server {
     }
 
     public route = (): void => {
-        this.backend.use('/api', this.backendRoute.router);
         this.backend.use('/api', this.productRoute.router);
     }
 

@@ -8,44 +8,39 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = require("mongoose");
+const MongoDBC_1 = __importDefault(require("../db/mongo/MongoDBC"));
 class ProductModel {
     constructor() {
         this.getProducts = () => __awaiter(this, void 0, void 0, function* () {
-            const productModel = (0, mongoose_1.model)('products', this.productSchema);
-            const product = yield productModel.find();
+            this.mongoDBC.connection();
+            const product = yield this.mongoDBC.product.find();
             return product;
         });
         this.getProductSearch = (consulta) => __awaiter(this, void 0, void 0, function* () {
+            this.mongoDBC.connection();
             const query = ".*" + consulta + "*.";
-            const productModel = (0, mongoose_1.model)('products', this.productSchema);
-            const product = yield productModel.find({ "nombre": { "$regex": query, "$options": "i" } });
+            const product = yield this.mongoDBC.product.find({ "nombre": { "$regex": query, "$options": "i" } });
             return product;
         });
         this.getProductsPage = (page) => __awaiter(this, void 0, void 0, function* () {
-            const productModel = (0, mongoose_1.model)('products', this.productSchema);
+            this.mongoDBC.connection();
             let final = page * 12;
             let inicio = final - 12;
             if (page == 1) {
-                const product = yield productModel.find().limit(12);
+                const product = yield this.mongoDBC.product.find().limit(12);
                 return product;
             }
             else {
-                const product = yield productModel.find().skip(inicio).limit(final);
+                const product = yield this.mongoDBC.product.find().skip(inicio).limit(final);
                 return product;
             }
             return null;
         });
-        this.productSchema = new mongoose_1.Schema({
-            nombre: { type: String, required: true },
-            contenido: { type: String, required: true },
-            precio: { type: Number, required: true },
-            moneda: { type: String, required: true },
-            sale: { type: String, required: true },
-            img: { type: String, required: true },
-            Descripcion: { type: String, required: true }
-        });
+        this.mongoDBC = new MongoDBC_1.default();
     }
 }
 exports.default = ProductModel;

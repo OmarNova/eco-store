@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const people_json_1 = __importDefault(require("../db/people.json"));
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
-const product = require('./ProductModel');
 class BackendModel {
     constructor() {
         this.getPeopleByID = (id) => people_json_1.default[--id];
