@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
 import ProductModel from "../model/ProductModel";
-import mongoose from "mongoose";
-import config from "../config/config";
 import path from 'path'
 import fs from 'fs'
 
@@ -10,7 +8,6 @@ class ProductController {
     private model: ProductModel;
 
     constructor() {
-        mongoose.connect(config.DB.URI);
         this.model = new ProductModel();
     }
 
@@ -18,8 +15,6 @@ class ProductController {
 
     public getProduct = async (req: Request, res: Response) => {
         const product = await this.model.getProducts();
-
-        console.log(product);
         if (product) {
             return res.send(product);
         }

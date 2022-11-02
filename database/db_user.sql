@@ -1,15 +1,6 @@
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-
 -- -----------------------------------------------------
--- Schema ecostore
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema ecostore
--- -----------------------------------------------------
+DROP DATABASE IF EXISTS ecostore;
 CREATE SCHEMA IF NOT EXISTS `ecostore` DEFAULT CHARACTER SET utf8 ;
 USE `ecostore` ;
 
@@ -17,11 +8,11 @@ USE `ecostore` ;
 -- Table `ecostore`.`users`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ecostore`.`users` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nombres` VARCHAR(45) NOT NULL,
   `apellidos` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
+  `passwd` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -30,7 +21,7 @@ ENGINE = InnoDB;
 -- Table `ecostore`.`perdidos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ecostore`.`perdidos` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `users_id` INT NOT NULL,
   `total` DOUBLE NOT NULL,
   PRIMARY KEY (`id`, `users_id`),
@@ -57,7 +48,7 @@ ENGINE = InnoDB;
 -- Table `ecostore`.`favorito`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ecostore`.`favorito` (
-  `idfavorito` INT NOT NULL,
+  `idfavorito` INT NOT NULL AUTO_INCREMENT,
   `idProduct` VARCHAR(45) NOT NULL,
   `users_id` INT NOT NULL,
   PRIMARY KEY (`idfavorito`, `users_id`),
@@ -126,7 +117,3 @@ CREATE TABLE IF NOT EXISTS `ecostore`.`productos_has_favorito` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

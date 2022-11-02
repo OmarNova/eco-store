@@ -13,8 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const ProductModel_1 = __importDefault(require("../model/ProductModel"));
-const mongoose_1 = __importDefault(require("mongoose"));
-const config_1 = __importDefault(require("../config/config"));
 const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
 class ProductController {
@@ -22,7 +20,6 @@ class ProductController {
         this.index = (req, res) => res.json({ 'error': 0, 'msg': 'API: node-express-ts' });
         this.getProduct = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const product = yield this.model.getProducts();
-            console.log(product);
             if (product) {
                 return res.send(product);
             }
@@ -64,7 +61,6 @@ class ProductController {
             }
             return res.json({ 'error': 1, 'msg': 'API: id no found' });
         });
-        mongoose_1.default.connect(config_1.default.DB.URI);
         this.model = new ProductModel_1.default();
     }
 }

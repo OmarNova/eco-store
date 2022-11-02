@@ -6,10 +6,11 @@ export default {
     },
 
     DBMYSQL: {
-      host: 'localhost:3307',
+      host: 'localhost',
       user: 'root',
       password: 'admin',
-      database: ''
+      database: 'ecostore',
+      port: '3307'
     }
 
   };

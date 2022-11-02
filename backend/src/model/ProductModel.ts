@@ -1,7 +1,4 @@
-import { Schema, model, connect } from 'mongoose';
 import MongoDBC from "../db/mongo/MongoDBC";
-
-
 
 class ProductModel {
 
