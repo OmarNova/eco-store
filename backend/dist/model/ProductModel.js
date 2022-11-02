@@ -10,18 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
-/*const productSchema = new Schema<IProduct>({
-
-  nombre:  { type: String, required: true },
-  contenido:  { type: String, required: true },
-  precio:  { type: Number, required: true },
-  moneda:  { type: String, required: true },
-  sale:  { type: String, required: true },
-  img:  { type: String, required: true },
-  Descripcion:  { type: String, required: true }
-});*/
-// 3. Create a Model.
-//const product = model<IProduct>('User', productSchema);
 class ProductModel {
     constructor() {
         this.getProducts = () => __awaiter(this, void 0, void 0, function* () {

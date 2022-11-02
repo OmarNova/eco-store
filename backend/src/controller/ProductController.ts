@@ -18,7 +18,8 @@ class ProductController {
 
     public getProduct = async (req: Request, res: Response) => {
         const product = await this.model.getProducts();
-        console.log(req.query.name);
+
+        console.log(product);
         if (product) {
             return res.send(product);
         }

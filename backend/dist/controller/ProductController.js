@@ -22,7 +22,7 @@ class ProductController {
         this.index = (req, res) => res.json({ 'error': 0, 'msg': 'API: node-express-ts' });
         this.getProduct = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const product = yield this.model.getProducts();
-            console.log(req.query.name);
+            console.log(product);
             if (product) {
                 return res.send(product);
             }
