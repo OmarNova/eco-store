@@ -10,6 +10,8 @@ class UserRoute {
         this.config = () => {
             this.router.get('/', this.UserController.index);
             this.router.get('/user/:email', this.UserController.getUser);
+            this.router.post('/user/register', this.UserController.registerUser);
+            this.router.post('/user/login', this.UserController.loginUser);
         };
         this.router = (0, express_1.Router)();
         this.UserController = new UserController_1.default();

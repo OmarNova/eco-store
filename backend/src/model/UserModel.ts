@@ -1,4 +1,6 @@
 import MysqlDBC from "../db/myslq/MysqlDBC";
+import bcrypt from "bcrypt";
+import { json } from "express";
 
 export default class MoviesModel {
 
@@ -28,11 +30,32 @@ export default class MoviesModel {
     public getUser = (email: string, fn: Function) => {
         this.mysqlDBC.connection();
         const statement = `SELECT * FROM users WHERE email='${email}'`;
-        this.mysqlDBC.pool.query(statement, (error: any, rows: any) => {            
+        this.mysqlDBC.pool.query(statement, (error: any, rows: any) => {
             fn(error, rows);
         }); 
        
-    } 
+    }
+
+
+    public insertUser = async (data: {nombres: string,apellidos: string,email: string,passwd:string}, fn: Function) => {
+        this.mysqlDBC.connection();
+        const password_hash=bcrypt.hashSync(data.passwd, 10);
+        const statement = `INSERT INTO users(nombres, apellidos, email, passwd) VALUES('${data.nombres}', '${data.apellidos}', '${data.email}', '${password_hash}');`;
+        this.mysqlDBC.pool.query(statement, (error: any, rows: any) => {  
+            fn(error, rows);
+        }); 
+    }
+
+    public login = async (data: {email: string,passwd:string}, fn: Function) => {
+        this.mysqlDBC.connection();
+
+        const statement = `SELECT passwd FROM users WHERE email='${data.email}'`;
+        this.mysqlDBC.pool.query(statement, (error: any, rows: any) => {
+            const verified = bcrypt.compareSync(data.passwd, rows[0].passwd);
+            fn(error, verified);
+        }); 
+    }
+
 
     public getMovie = (id: number, fn: Function) => {
         this.mysqlDBC.connection();

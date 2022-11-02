@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     DB: {
-        URI: process.env.MONGODB_URI || 'mongodb://localhost:27017/ecostore',
+        URI: process.env.MONGODB_URI || 'mongodb+srv://OmarNova:2G3ItBCbNelDh2MH@ecostore.21wsizh.mongodb.net/ecostore',
         USER: process.env.MONGODB_USER,
         PASSWORD: process.env.MONGODB_PASSWORD
     },
