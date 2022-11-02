@@ -1,5 +1,4 @@
-import { Document } from "mongoose";
-export default interface IProduct extends Document {
+export interface ProductsI{
     id:number;
     nombre: string;
     contenido: string;
@@ -9,5 +8,4 @@ export default interface IProduct extends Document {
     img: string;
     Descripcion: string;
 
-  }
-  
+}
