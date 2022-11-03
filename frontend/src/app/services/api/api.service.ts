@@ -20,7 +20,7 @@ export class ApiService {
 
   loginByEmail(form:any):Observable<ResponseI>{
 
-    let dir = this.url + "auth";
+    let dir = this.url + "user/login";
 
     return this.http.post<ResponseI>(dir, form);
   }

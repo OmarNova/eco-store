@@ -7,7 +7,6 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
-   
   },
   "private": true,
   "dependencies": {
@@ -15,12 +14,13 @@
     "@angular/common": "^14.2.0",
     "@angular/compiler": "^14.2.0",
     "@angular/core": "^14.2.0",
-    "@angular/forms": "^14.2.0",
+    "@angular/forms": "^14.2.8",
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
-    "@angular/router": "^14.2.0",
+    "@angular/router": "^14.2.8",
     "bootstrap": "^5.2.2",
     "jquery": "^3.6.1",
+    "ng": "^0.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
