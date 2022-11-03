@@ -13,7 +13,7 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
-    <form id="form1">
+    <form id="form1" [formGroup]="registerForm" (ngSubmit)="onLogin(registerForm.value)">
         <div class="container py-3">
             <div class="row">
                 <div class="col-md-12">            
@@ -28,9 +28,10 @@
                                         <label>Nombres</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
+                                                
                                                 <span class="input-group-text"><i class="fa fa-user"></i></span>
                                             </div>
-                                            <input ID="txtFirstName" Class="form-control" type="text"/>
+                                            <input ID="nombres" Class="form-control" type="text" />
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -39,7 +40,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fa fa-user"></i></span>
                                             </div>
-                                            <input ID="txtLastName" Class="form-control"  type="text"/>
+                                            <input ID="apellidos" Class="form-control"  type="text"/>
                                         </div>
                                     </div>
                                     <div class="card-header">
@@ -51,7 +52,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fa fa-envelope"></i></span>
                                             </div>
-                                            <input ID="txtEmail" Class="form-control" type="text"/>
+                                            <input ID="email" Class="form-control" type="text"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -60,7 +61,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fa fa-lock"></i></span>
                                             </div>
-                                            <input ID="txtPassword"  type="Password" Class="form-control"/>
+                                            <input ID="passwd"  type="Password" Class="form-control"/>
                                         </div>
                                         <div id="strengthMessage"></div>
                                     </div>
@@ -70,7 +71,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fa fa-lock"></i></span>
                                             </div>
-                                            <input ID="txtConfirmPassword" type="Password" Class="form-control"/>
+                                            <input ID="Confirmpasswd" type="Password" Class="form-control"/>
                                         </div>
                                     </div>
                                     <div class="form-group ">
