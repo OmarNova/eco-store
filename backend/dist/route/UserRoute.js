@@ -9,7 +9,8 @@ class UserRoute {
     constructor() {
         this.config = () => {
             this.router.get('/', this.UserController.index);
-            this.router.get('/user/:email', this.UserController.getUser);
+            this.router.get('/:email/', this.UserController.getUser);
+            this.router.get('/user/logout', this.UserController.logoutUser);
             this.router.post('/user/register', this.UserController.registerUser);
             this.router.post('/user/login', this.UserController.loginUser);
         };

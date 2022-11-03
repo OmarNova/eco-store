@@ -8,6 +8,9 @@ class UserController {
     constructor() {
         this.index = (req, res) => res.json({ 'error': 0, 'msg': 'API: node-express-ts' });
         this.getUser = (req, res) => {
+            if (req.session.email) {
+                console.log(req.session.email);
+            }
             const { email } = req.params;
             this.model.getUser(email, (error, rows) => {
                 if (error) {
@@ -49,6 +52,18 @@ class UserController {
                 return res.status(404).json({ error: false, message: 'Data not found' });
             }
         };
+        this.logoutUser = (req, res) => {
+            if (req.session.email) {
+                req.session.destroy((err) => {
+                    if (err)
+                        throw err;
+                    return res.json({ error: false, message: 'Logout' });
+                });
+            }
+            else {
+                return res.json({ error: true, message: 'Sessions Not Exists' });
+            }
+        };
         this.loginUser = (req, res) => {
             if (JSON.stringify(req.body) != "{}") {
                 this.model.getUser(req.body.email, (error, rows) => {
@@ -63,6 +78,8 @@ class UserController {
                                 return res.json({ error: true, message: 'e201' });
                             }
                             else if (rows) {
+                                req.session.email = req.body.email;
+                                console.log(req.session.email);
                                 return res.json({ error: false, message: 'Login correct' });
                             }
                             else {
