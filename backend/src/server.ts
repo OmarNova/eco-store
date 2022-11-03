@@ -2,7 +2,7 @@ import express, { Application, json, urlencoded } from "express";
 import ProductRoute from "./route/ProductRoute";
 import UserRoute from "./route/UserRoute";
 import cors from 'cors';
-
+import session from 'express-session';
 
 class Server {
 
@@ -23,6 +23,12 @@ class Server {
         this.backend.set('port', 1802);
         this.backend.use(urlencoded({extended: true}));
         this.backend.use(json());
+        this.backend.use(session({
+            secret:'ecostore',
+            resave: false,
+            saveUninitialized: false
+        }));
+
         this.backend.use(cors());
     }
 

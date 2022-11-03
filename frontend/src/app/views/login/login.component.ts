@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(form:any){
-    this.api.loginByEmail(form).subscribe(data => {
+    this.api.loginByEmail(form).subscribe((data: any) => {
       console.log(data);
     })
     console.log(form)
