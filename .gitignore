@@ -1,5 +1,5 @@
 node_modules
-config
+.angular
 frontend/package-lock.json
 *.json
 frontend/package-lock.json

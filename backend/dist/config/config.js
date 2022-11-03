@@ -12,5 +12,8 @@ exports.default = {
         password: 'admin',
         database: 'ecostore',
         port: '3307'
+    },
+    jwt: {
+        key: 'secretkey_ecostore'
     }
 };

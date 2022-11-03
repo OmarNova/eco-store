@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `ecostore`.`users` (
   `nombres` VARCHAR(45) NOT NULL,
   `apellidos` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  `passwd` VARCHAR(45) NOT NULL,
+  `passwd` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 

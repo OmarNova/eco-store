@@ -6,11 +6,13 @@ npm i mongoose
 npm i mysql
 npm i bcrypt
 npm i express-session
+npm i jsonwebtoken
 
 npm i nodemon -D
 npm i cors -D
 
 npm i @types/express-session -D
+npm i @types/jsonwebtoken -D
 npm i @types/express -D
 npm i @types/cors -D
 npm i concurrently -D

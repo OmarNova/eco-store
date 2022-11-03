@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import UserModel from "../model/UserModel";
+import jwt from "jsonwebtoken";
+import config from "../config/config"
 
 class UserController {
 
@@ -83,9 +85,12 @@ class UserController {
                             console.error(error);
                             return res.json({ error: true, message: 'e201' });
                         } else if (rows) {
-                            req.session.email = req.body.email;
-                            console.log(req.session.email);
-                            return res.json({ error: false, message: 'Login correct' });
+                            
+                            jwt.sign({email: req.body.email}, config.jwt.key, (err: any,token: any) =>{
+                                req.session.email = token;
+                                return res.json({ error: false, message: token });
+                            } );    
+
                         }else{
                             return res.json({ error: false, message: 'Password incorrect' });
                         }

@@ -4,6 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const UserModel_1 = __importDefault(require("../model/UserModel"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const config_1 = __importDefault(require("../config/config"));
 class UserController {
     constructor() {
         this.index = (req, res) => res.json({ 'error': 0, 'msg': 'API: node-express-ts' });
@@ -78,9 +80,10 @@ class UserController {
                                 return res.json({ error: true, message: 'e201' });
                             }
                             else if (rows) {
-                                req.session.email = req.body.email;
-                                console.log(req.session.email);
-                                return res.json({ error: false, message: 'Login correct' });
+                                jsonwebtoken_1.default.sign({ email: req.body.email }, config_1.default.jwt.key, (err, token) => {
+                                    req.session.email = token;
+                                    return res.json({ error: false, message: token });
+                                });
                             }
                             else {
                                 return res.json({ error: false, message: 'Password incorrect' });
