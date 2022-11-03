@@ -1,2 +1,4 @@
 node_modules
 frontend/package-lock.json
+*.json
+frontend/package-lock.json
