@@ -18,22 +18,27 @@ export class LoginComponent implements OnInit {
   })
 
   constructor(private api:ApiService, private router:Router) { }
+  errorStatus:boolean = false;
+  errorMsj:any = "";
+
 
   ngOnInit(): void {
+    this.checkLocalStorage();
+  }
+
+  checkLocalStorage(){
+    if(localStorage.getItem('token')){
+      this.router.navigate(['index']);
+    }
   }
 
   onLogin(form:any){
-<<<<<<< HEAD
     this.api.loginByEmail(form).subscribe(data => {
       let dataResponse:ResponseI = data;
-      if(dataResponse.status){
-        localStorage.setItem("token",dataResponse.response.token);
+      if(!dataResponse.error){
+        localStorage.setItem("token",dataResponse.message);
         this.router.navigate(['index'])
       }
-=======
-    this.api.loginByEmail(form).subscribe((data: any) => {
-      console.log(data);
->>>>>>> 85ff6de85b04a4d0808816d083c627c53ea11132
     })
     console.log(form)
   }

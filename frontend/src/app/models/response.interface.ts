@@ -1,4 +1,4 @@
 export interface ResponseI{
-    status:string;
-    response:any;
+    error:boolean;
+    message:any;
 }

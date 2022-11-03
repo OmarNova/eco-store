@@ -15,7 +15,7 @@ export class IndexComponent implements OnInit {
   constructor(private api:ApiService) { }
 
   ngOnInit(): void {
-    this.api.getProduct().subscribe( data => (this.product = data));
+    this.api.getProduct().subscribe( (data: ProductsI[]) => (this.product = data));
   }
 
 }
