@@ -13,7 +13,7 @@ import { ResponseI } from '../../models/response.interface'
 export class LoginComponent implements OnInit {
 
   loginForm = new FormGroup({
-    email : new FormControl('usuario@gmail.com',Validators.required),
+    email : new FormControl('',Validators.required),
     passwd : new FormControl('',Validators.required)
   })
 
@@ -39,12 +39,25 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("token",dataResponse.message);
         this.router.navigate(['index'])
       }else{
-        console.log(dataResponse.message);
+        this.errorStatus = true;
+        this.errorMsj = dataResponse.message;
       }
     })
     console.log(form)
   }
 
-  
+  getIdToken(){
+
+    return localStorage.getItem('token')
+  }
+
+  login(){
+    return localStorage.getItem('token')
+  }
+
+  logout(){
+    localStorage.removeItem('token')
+    this.router.navigate(['index'])
+  }
 
 }

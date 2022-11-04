@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IndexComponent } from '../../views/index/index.component';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private index:IndexComponent) { }
 
   ngOnInit(): void {
+  }
+
+  onLogout(){
+    this.index.onLogout();
   }
 
 }

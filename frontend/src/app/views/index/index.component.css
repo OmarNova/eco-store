@@ -161,11 +161,6 @@ cursor: pointer;
   display: inline-block;
 }
 
-#main{
-  
-
-}
-
 .container{
   position: left;
   margin: 1%;
@@ -180,7 +175,7 @@ cursor: pointer;
   margin: 10%;
   padding: 1%;
   transform: 0.1s;
-  ;
+  display: inline-block;
 }
 
 .producto button:hover {

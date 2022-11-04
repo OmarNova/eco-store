@@ -1,4 +1,83 @@
-<app-header></app-header>
+<div class="row">
+  <div class="col-2">
+      <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="index.html"><img class="logo" src="assets/logo.jpg" alt="logo"></a>
+      </a>
+  </div>
+  <div class="col-6 d-flex justify-content-end py-3 "  >
+  
+      <form class="buscador" id="buscador" role="search" onkeyup="barra_search()">
+          <input id="buscador-input" type="" placeholder="¿Qué producto estás buscando...?" aria-label="Search">
+          <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icon-navbar" viewBox="0 0 16 16">
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+      </form>
+  </div>
+  <div class="col-3 ">
+      
+      <div class="row">
+          <nav class="navbar navbar-expand-lg">
+              <div class="container-fluid">
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" >
+                        <i class="bi bi-heart d-flex justify-content-center" style="color: #009929;"></i>
+                        <p style="color: black;">Mis Favoritos</p>
+                      </a>
+                    </li>
+  
+                    <li class="nav-item dropdown">
+                      <a  routerLink='/login' class="nav-link dropdown" href="#" role="button"  data-bs-toggle="dropdown" aria-expanded="false">
+                          <i class="bi bi-person-circle d-flex justify-content-center" style="color: #009929;"></i>
+                          
+                          <p style="color: black;">Mi cuenta</p>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li>
+                          <a routerLink='/login' class="dropdown-item" href="#">Mi cuenta</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="#">Mis favoritos</a
+                            ></li>
+                        <li>
+                          <a class="dropdown-item" href="carrito.html">Mi carrito</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="login.html">Entrar</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="registro.html">Crear una cuenta</a>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link" onclick="mi_carrito()" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-basket3 d-flex justify-content-center " style="color: #009929;"></i>
+                          <p style="color: black;">Mi carrito</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-box-arrow-in-right d-flex justify-content-center " style="color: #009929;" (click)="onLogout()" ></i>
+                          <p style="color: black;">LogOut</p>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                </div>
+              </div>
+            </nav>
+      </div>
+
+  </div>
+</div>
+
 
 <!doctype html>
 <html lang="en">
@@ -15,9 +94,9 @@
 </head>
 
 <body>
-  <div class="si container" style="" id="main">
+  <div class="container" id="main" style="display:flex;">
     <div class="row">
-      <div class="col-2">
+      <div class="col-12 col-md-12">
         <div class="container" id="filtro">
           <div class="row py-3 px-3">
             <h2 id="filtro-precio">Precio</h2>
@@ -25,8 +104,6 @@
           <div class="row py-3 px-3">
             <input type="range" class="input-range-precio" name="price-max" id="input-range-precio" value="" min="0"
               max="">
-
-
           </div>
           <div class="row">
             <div class="col py-3 px-4">
@@ -44,19 +121,17 @@
               <div class="row">
                 <input type="number" class="precio-input" id="precio-max" disabled value="0">
               </div>
-
             </div>
           </div>
-
           <div class="row" onclick="filtrar()">
             <button class="boton btn-verde" id="filtrar">Filtrar</button>
           </div>
         </div>
       </div>
     </div>
-    <div class="">
-      <div class="row" *ngFor="let item of product" class="si">
-        <div class="card col-sm-4" style="width: 15rem;">
+    <div class="col-12 col-md-4" style="display:flex;">
+      <div class="row" *ngFor="let item of product let i = index" class="si">
+        <div class="card col-12 col-md-2 text-center" style="width: 15rem;">
           <img class="card-img-top" src="{{item.img}}" alt="Card image cap">
           <div class="card-body">
             <p style="visibility: hidden;">{{item._id}}</p>
@@ -67,12 +142,13 @@
                 {{item.precio}}{{item.moneda}}</p>
             </span>
             <a href="#" class="btn btn-primary"
-              style="margin-left:25%; background-color: #5ccb5f; border-color: #5ccb5f; font-weight: bold;">Comprar</a>
+              style="background-color: #5ccb5f; border-color: #5ccb5f; font-weight: bold; width:100%;">Comprar</a>
           </div>
         </div>
       </div>
     </div>
   </div>
+
 
 
   <div class="row py-2">
