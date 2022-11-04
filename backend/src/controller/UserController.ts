@@ -38,23 +38,23 @@ class UserController {
             this.model.getUser(req.body.email, (error: any, rows: any) => {
                 if (error) {
                     console.error(error);
-                    return res.json({ error: true, message: 'e101' });
+                    return res.json({ error: true, message: 'Error in database' });
                 }            
                 if (rows.length == 0) {
                     this.model.insertUser( {nombres: req.body.nombres,apellidos: req.body.apellidos,email: req.body.email,passwd: req.body.passwd}, (error: any, rows: any) => {
                         if (error) {
                             console.error(error);
-                            return res.json({ error: true, message: 'e201' });
+                            return res.json({ error: true, message: 'Error in database' });
                         } else {
                             return res.json({ error: false, message: 'User Insert' });
                         }
                     });
                 } else {
-                    return res.status(404).json({ error: false, message: 'User Already Exists' });
+                    return res.status(404).json({ error: true, message: 'User Already Exists' });
                 }
             });
         } else {
-            return res.status(404).json({ error: false, message: 'Data not found' });
+            return res.status(404).json({ error: true, message: 'Data not found' });
         }
     }
 
@@ -83,24 +83,24 @@ class UserController {
                     this.model.login( {email: req.body.email,passwd: req.body.passwd}, (error: any, rows: any) => {
                         if (error) {
                             console.error(error);
-                            return res.json({ error: true, message: 'e201' });
+                            return res.json({ error: true, message: 'Error in database' });
                         } else if (rows) {
-                            
+
                             jwt.sign({email: req.body.email}, config.jwt.key, (err: any,token: any) =>{
                                 req.session.email = token;
                                 return res.json({ error: false, message: token });
                             } );    
 
                         }else{
-                            return res.json({ error: false, message: 'Password incorrect' });
+                            return res.json({ error: true, message: 'Password incorrect' });
                         }
                     });
                 } else {
-                    return res.status(404).json({ error: false, message: 'User Not Exists' });
+                    return res.status(404).json({ error: true, message: 'User Not Exists' });
                 }
             });
         } else {
-            return res.status(404).json({ error: false, message: 'Data not found' });
+            return res.status(404).json({ error: true, message: 'Data not found' });
         }
     }
 
