@@ -30,18 +30,12 @@ const express_1 = __importStar(require("express"));
 const ProductRoute_1 = __importDefault(require("./route/ProductRoute"));
 const UserRoute_1 = __importDefault(require("./route/UserRoute"));
 const cors_1 = __importDefault(require("cors"));
-const express_session_1 = __importDefault(require("express-session"));
 class Server {
     constructor() {
         this.config = () => {
             this.backend.set('port', 1802);
             this.backend.use((0, express_1.urlencoded)({ extended: true }));
             this.backend.use((0, express_1.json)());
-            this.backend.use((0, express_session_1.default)({
-                secret: 'ecostore',
-                resave: false,
-                saveUninitialized: false
-            }));
             this.backend.use((0, cors_1.default)());
         };
         this.route = () => {

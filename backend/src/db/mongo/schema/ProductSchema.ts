@@ -4,7 +4,7 @@ import IProduct from "db/mongo/interface/IProduct";
 
 
 const productSchema = new Schema({
-
+    _id: { type: String, required: true },
     nombre:  { type: String, required: true },
     contenido:  { type: String, required: true },
     precio:  { type: Number, required: true },

@@ -26,6 +26,11 @@ class ProductModel {
             const product = yield this.mongoDBC.product.find({ "nombre": { "$regex": query, "$options": "i" } });
             return product;
         });
+        this.getProductById = (consulta) => __awaiter(this, void 0, void 0, function* () {
+            this.mongoDBC.connection();
+            const product = yield this.mongoDBC.product.findOne({ _id: consulta });
+            return product;
+        });
         this.getProductsPage = (page) => __awaiter(this, void 0, void 0, function* () {
             this.mongoDBC.connection();
             let final = page * 12;

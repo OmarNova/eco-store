@@ -22,6 +22,12 @@ class ProductModel {
         return product
     }
 
+    public getProductById = async (consulta: string) => {
+        this.mongoDBC.connection();
+        const product = await this.mongoDBC.product.findOne({_id: consulta});
+        return product
+    }
+
 
     public getProductsPage = async (page: number) => {
         this.mongoDBC.connection();

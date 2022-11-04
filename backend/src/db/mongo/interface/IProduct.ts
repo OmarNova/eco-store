@@ -1,6 +1,6 @@
 import { Document } from "mongoose";
 export default interface IProduct extends Document {
-    id: number;
+    _id: string;
     nombre: string;
     contenido: string;
     precio: number;

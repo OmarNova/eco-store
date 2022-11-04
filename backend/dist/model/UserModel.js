@@ -37,6 +37,27 @@ class MoviesModel {
                 fn(error, rows);
             });
         };
+        this.getFavorites = (id, fn) => {
+            this.mysqlDBC.connection();
+            const statement = `SELECT DISTINCT productos_idproductos FROM productos_has_users WHERE users_id=${id};`;
+            this.mysqlDBC.pool.query(statement, (error, rows) => {
+                fn(error, rows);
+            });
+        };
+        this.postFavorites = (idUser, idProduct, fn) => {
+            this.mysqlDBC.connection();
+            const statement = `INSERT INTO productos_has_users(users_id,productos_idproductos) VALUES (${idUser},'${idProduct}')`;
+            this.mysqlDBC.pool.query(statement, (error, rows) => {
+                fn(error, rows);
+            });
+        };
+        this.deleteFavorites = (idUser, idProduct, fn) => {
+            this.mysqlDBC.connection();
+            const statement = `DELETE FROM productos_has_users WHERE users_id=${idUser} AND productos_idproductos='${idProduct}'`;
+            this.mysqlDBC.pool.query(statement, (error, rows) => {
+                fn(error, rows);
+            });
+        };
         this.insertUser = (data, fn) => __awaiter(this, void 0, void 0, function* () {
             this.mysqlDBC.connection();
             const password_hash = bcrypt_1.default.hashSync(data.passwd, 10);

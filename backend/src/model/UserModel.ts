@@ -36,6 +36,31 @@ export default class MoviesModel {
        
     }
 
+    public getFavorites = (id: number, fn: Function) => {
+        this.mysqlDBC.connection();
+        const statement = `SELECT DISTINCT productos_idproductos FROM productos_has_users WHERE users_id=${id};`;
+        this.mysqlDBC.pool.query(statement, (error: any, rows: any) => {
+            fn(error, rows);
+        }); 
+       
+    }
+
+    public postFavorites = (idUser: number, idProduct: string ,fn: Function) => {
+        this.mysqlDBC.connection();
+        const statement = `INSERT INTO productos_has_users(users_id,productos_idproductos) VALUES (${idUser},'${idProduct}')`;
+        this.mysqlDBC.pool.query(statement, (error: any, rows: any) => {
+            fn(error, rows);
+        }); 
+    }
+
+    public deleteFavorites = (idUser: number, idProduct: string ,fn: Function) => {
+        this.mysqlDBC.connection();
+        const statement = `DELETE FROM productos_has_users WHERE users_id=${idUser} AND productos_idproductos='${idProduct}'`;
+        this.mysqlDBC.pool.query(statement, (error: any, rows: any) => {
+            fn(error, rows);
+        }); 
+    }
+
 
     public insertUser = async (data: {nombres: string,apellidos: string,email: string,passwd:string}, fn: Function) => {
         this.mysqlDBC.connection();
