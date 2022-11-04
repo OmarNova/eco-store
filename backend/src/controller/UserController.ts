@@ -50,7 +50,7 @@ class UserController {
                         }
                     });
                 } else {
-                    return res.status(404).json({ error: true, message: 'User Already Exists' });
+                    return res.json({ error: true, message: 'User Already Exists' });
                 }
             });
         } else {
@@ -96,7 +96,7 @@ class UserController {
                         }
                     });
                 } else {
-                    return res.status(404).json({ error: true, message: 'User Not Exists' });
+                    return res.json({ error: true, message: 'User Not Exists' });
                 }
             });
         } else {

@@ -38,6 +38,8 @@ export class LoginComponent implements OnInit {
       if(!dataResponse.error){
         localStorage.setItem("token",dataResponse.message);
         this.router.navigate(['index'])
+      }else{
+        console.log(dataResponse.message);
       }
     })
     console.log(form)
