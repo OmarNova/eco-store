@@ -13,11 +13,24 @@ class UserController {
 
     public index = (req: Request, res: Response) => res.json({ 'error': 0, 'msg': 'API: node-express-ts' });
 
+    public getFavorites = (req: Request, res: Response) => {
+        
+        const email = req.params.email;
+        this.model.getUser(email, (error: any, rows: any) => {
+            if (error) {
+                console.error(error);
+                return res.json({ error: true, message: 'e101' });
+            }            
+            if (rows.length != 0) {
+                return res.json(rows);
+            } else {
+                return res.status(404).json({ error: false, message: 'User not Found' });
+            }
+        });
+
+    }
+
     public getUser =  (req: Request, res: Response) => {
-        if(req.session.email){
-            console.log(req.session.email);
-        }
-    
         const { email } =  req.params;
         this.model.getUser(email, (error: any, rows: any) => {
             if (error) {
@@ -85,11 +98,9 @@ class UserController {
                             console.error(error);
                             return res.json({ error: true, message: 'Error in database' });
                         } else if (rows) {
-
-                            jwt.sign({email: req.body.email}, config.jwt.key, (err: any,token: any) =>{
-                                req.session.email = token;
-                                return res.json({ error: false, message: token });
-                            } );    
+                            const token = jwt.sign({email: req.body.email}, config.jwt.key,{expiresIn: 3600});   
+                            req.session.email = token;
+                            return res.json({ error: false, message: token }); 
 
                         }else{
                             return res.json({ error: true, message: 'Password incorrect' });

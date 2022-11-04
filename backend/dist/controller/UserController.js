@@ -9,10 +9,22 @@ const config_1 = __importDefault(require("../config/config"));
 class UserController {
     constructor() {
         this.index = (req, res) => res.json({ 'error': 0, 'msg': 'API: node-express-ts' });
+        this.getFavorites = (req, res) => {
+            const email = req.params.email;
+            this.model.getUser(email, (error, rows) => {
+                if (error) {
+                    console.error(error);
+                    return res.json({ error: true, message: 'e101' });
+                }
+                if (rows.length != 0) {
+                    return res.json(rows);
+                }
+                else {
+                    return res.status(404).json({ error: false, message: 'User not Found' });
+                }
+            });
+        };
         this.getUser = (req, res) => {
-            if (req.session.email) {
-                console.log(req.session.email);
-            }
             const { email } = req.params;
             this.model.getUser(email, (error, rows) => {
                 if (error) {
@@ -80,10 +92,9 @@ class UserController {
                                 return res.json({ error: true, message: 'Error in database' });
                             }
                             else if (rows) {
-                                jsonwebtoken_1.default.sign({ email: req.body.email }, config_1.default.jwt.key, (err, token) => {
-                                    req.session.email = token;
-                                    return res.json({ error: false, message: token });
-                                });
+                                const token = jsonwebtoken_1.default.sign({ email: req.body.email }, config_1.default.jwt.key, { expiresIn: 3600 });
+                                req.session.email = token;
+                                return res.json({ error: false, message: token });
                             }
                             else {
                                 return res.json({ error: true, message: 'Password incorrect' });

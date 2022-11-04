@@ -5,11 +5,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const UserController_1 = __importDefault(require("../controller/UserController"));
+const auth_1 = __importDefault(require("../auth/auth"));
 class UserRoute {
     constructor() {
         this.config = () => {
             this.router.get('/', this.UserController.index);
             this.router.get('/:email/', this.UserController.getUser);
+            this.router.get('/user/favorites/', auth_1.default, this.UserController.getFavorites);
             this.router.get('/user/logout', this.UserController.logoutUser);
             this.router.post('/user/register', this.UserController.registerUser);
             this.router.post('/user/login', this.UserController.loginUser);
