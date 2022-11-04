@@ -15,7 +15,7 @@
 </head>
 
 <body>
-  <div class="container" style="display:flex;">
+  <div class="si container" style="" id="main">
     <div class="row">
       <div class="col-2">
         <div class="container" id="filtro">
@@ -53,30 +53,26 @@
           </div>
         </div>
       </div>
-
-
-
-      <div class="col-8">
-        <div id="vitrina">
-        </div>
-
-      </div>
     </div>
-    <div>
-      <div *ngFor="let item of product" class="si">
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="">
+      <div class="row" *ngFor="let item of product" class="si">
+        <div class="card col-sm-4" style="width: 15rem;">
+          <img class="card-img-top" src="{{item.img}}" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">{{item.nombre}}</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <p style="visibility: hidden;">{{item._id}}</p>
+            <h5 class="card-title" style="text-align: center;">{{item.nombre}}</h5>
+            <p class="card-text" style="text-align: center;">{{item.contenido}}</p>
+            <span>
+              <p style="margin:0px;" class="price" style="text-align: center; color: #5ccb5f; font-weight: bold;">
+                {{item.precio}}{{item.moneda}}</p>
+            </span>
+            <a href="#" class="btn btn-primary"
+              style="margin-left:25%; background-color: #5ccb5f; border-color: #5ccb5f; font-weight: bold;">Comprar</a>
           </div>
         </div>
       </div>
     </div>
   </div>
-
 
 
   <div class="row py-2">
