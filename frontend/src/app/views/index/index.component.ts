@@ -17,11 +17,12 @@ export class IndexComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.api.getProduct().subscribe( (data: ProductsI[]) => (this.dataProducts(data)));
+    this.api.getProduct().subscribe( (data: ProductsI[]) => (this.product = data, this.dataProducts(data)));
+    console.log(this.product);
   }
 
   dataProducts(data:ProductsI[]) : void{
-    const vitrina = document.getElementById("vitrina");
+    const vitrina = document.getElementById("vitrina") 
     if(vitrina){
       let i = 0;
       let row = document.createElement("div");
@@ -63,7 +64,7 @@ export class IndexComponent implements OnInit {
     let title = document.createElement("h5");
     title.innerHTML = product.nombre;
     title.classList.add("card-title");
-    title.setAttribute("style", "text-align: center;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;");
+    title.setAttribute("style", "text-align: center;");
 
     let contenido = document.createElement("p");
     contenido.innerHTML = product.contenido;
