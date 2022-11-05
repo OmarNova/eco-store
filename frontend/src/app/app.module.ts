@@ -7,6 +7,7 @@ import { HeaderComponent } from './templates/header/header.component';
 import { FooterComponent } from './templates/footer/footer.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ErrorTailorModule } from '@ngneat/error-tailor'
 //import { LoginComponent } from './views/login/login.component';
 //import { RegisterComponent } from './views/register/register.component';
 //import { IndexComponent } from './views/index/index.component';
@@ -29,6 +30,16 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    ErrorTailorModule.forRoot({
+      errors: {
+        useValue:{
+          required: 'Campo requerido',
+          minlength: ({requiredLength, actualLength}) => 
+          `Expect ${requiredLength} but got ${actualLength}`,
+          invalidAddress: error => `Address isn't valid`
+        }
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,4 +3,5 @@ export interface registerI{
   apellidos:string; 
   email:string; 
   passwd:string; 
+  confirmpasswd:string;
 }

@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api/api.service'
 import { ProductsI } from '../../models/product.interfaces';
 import { LoginComponent } from '../login/login.component';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
+import { Token } from '@angular/compiler';
+
 
 
 @Component({
@@ -98,7 +100,14 @@ export class IndexComponent implements OnInit {
 
   onLogout(){
     localStorage.clear()
-    this.router.navigate(['login'])
+    this.router.navigate(['index'])
+  }
+
+  estaLogueado(){
+
+      return localStorage.getItem('token');
+    
+
   }
 
 }
