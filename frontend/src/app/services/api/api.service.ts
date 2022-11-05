@@ -4,6 +4,7 @@ import { ResponseI } from '../../models/response.interface';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ProductsI } from '../../models/product.interfaces';
+import { registerI } from '../../models/register.interface';
 
 
 @Injectable({
@@ -22,6 +23,11 @@ export class ApiService {
 
     let dir = this.url + "user/login";
 
+    return this.http.post<ResponseI>(dir, form);
+  }
+
+  register(form:any):Observable<ResponseI>{
+    let dir = this.url + 'user/register';
     return this.http.post<ResponseI>(dir, form);
   }
 

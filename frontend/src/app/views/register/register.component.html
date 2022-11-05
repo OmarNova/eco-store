@@ -13,7 +13,7 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
-    <form id="form1" [formGroup]="registerForm" (ngSubmit)="onLogin(registerForm.value)">
+    <form role="form" [formGroup]="registerForm" (ngSubmit)="onRegister(registerForm.value)" errorTailor>
         <div class="container py-3">
             <div class="row">
                 <div class="col-md-12">            
@@ -31,7 +31,7 @@
                                                 
                                                 <span class="input-group-text"><i class="fa fa-user"></i></span>
                                             </div>
-                                            <input ID="nombres" Class="form-control" type="text" />
+                                            <input ID="nombres" Class="form-control" type="text" formControlName="nombres"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -40,7 +40,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fa fa-user"></i></span>
                                             </div>
-                                            <input ID="apellidos" Class="form-control"  type="text"/>
+                                            <input ID="apellidos" Class="form-control"  type="text" formControlName="apellidos"/>
                                         </div>
                                     </div>
                                     <div class="card-header">
@@ -52,7 +52,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fa fa-envelope"></i></span>
                                             </div>
-                                            <input ID="email" Class="form-control" type="text"/>
+                                            <input ID="email" Class="form-control" type="text" formControlName="email"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -61,7 +61,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fa fa-lock"></i></span>
                                             </div>
-                                            <input ID="passwd"  type="Password" Class="form-control"/>
+                                            <input ID="passwd"  type="Password" Class="form-control" formControlName="passwd" [controlErrorsTpl]="passwordError"/>
                                         </div>
                                         <div id="strengthMessage"></div>
                                     </div>
@@ -71,21 +71,26 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fa fa-lock"></i></span>
                                             </div>
-                                            <input ID="Confirmpasswd" type="Password" Class="form-control"/>
+                                            <input ID="Confirmpasswd" type="Password" Class="form-control" formControlName="confirmpasswd" [controlErrorsTpl]="passwordError"/>
+                                        </div>
+                                        <div class="alert alert-danger" *ngIf="errorStatus">
+                                            <p></p>
                                         </div>
                                     </div>
                                     <div class="form-group ">
                                         <div class="form-container">
                                             <div class="g-recaptcha" data-sitekey="6LeB-dEhAAAAABcBJxlLOKk4h20eOA2m-whJ_4qp"></div>
-                                                <input type="text" class="btn-new text-center" onclick="window.location.href='/index.html'" placeholder="Crear Cuenta">
+                                            <button class="btn-new text-center" role="link">Acceder</button>
                                         </div>
                                     </div>
                                     <div class="form-group ">
                                         
                                         <div class="form-container">
-                                            <input type="text" class="btn-login text-center" onclick="window.location.href='/index.html'" placeholder="Accede con Facebook">
+                                            <button class="btn-login text-center" role="link" onclick="window.location.href='/index.html'">Accede con Facebook</button>
                                         </div>
-                                        
+                                        <div class="alert alert-danger" *ngIf="errorStatus">
+                                            <p>{{ errorMsj }}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -94,6 +99,20 @@
                 </div>
             </div>
         </div>
+        <ng-template let-error let-text="text" #passwordError>
+            <!--{{ error | json }} {{ text }} -->
+            
+            <div *ngIf="error?.minlength">
+                <b>Error:</b>
+                <br>
+                <i>Contraseña muy corta: {{error.minlength?.actualLength}}</i>
+                <br>
+                <i>El minimo son: ({{error?.minlength?.requiredLength}})</i>
+                
+            </div>
+        </ng-template>
     </form>
+
+
 </body>
 </html>

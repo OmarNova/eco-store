@@ -57,8 +57,9 @@
                           <li><a  class="dropdown-item" href="#">Mi cuenta</a></li>
                           <li><a class="dropdown-item" href="#">Mis favoritos</a></li>
                           <li><a class="dropdown-item" >Mi carrito</a></li>
-                          <li><a routerLink='/login' class="dropdown-item">Entrar</a></li>
-                          <li><a routerLink='/register' class="dropdown-item">Crear una cuenta</a></li>
+                          <li><a routerLink='/login' class="dropdown-item" *ngIf="!estaLogueado()">Entrar</a></li>
+                          <li><a routerLink='/register' class="dropdown-item" *ngIf="!estaLogueado()">Crear una cuenta</a></li>
+                          <li><a routerLink='/index' class="dropdown-item" *ngIf="estaLogueado()" (click)="onLogout()">Cerrar sesión</a></li>
                         </ul>
                       </li>
   
@@ -67,14 +68,7 @@
                           <i class="bi bi-basket3 d-flex justify-content-center " style="color: #009929;"></i>
                             <p style="color: black;">Mi carrito</p>
                         </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="bi bi-box-arrow-in-right d-flex justify-content-center " style="color: #009929;" (click)="onLogout()" ></i>
-                            <p style="color: black;">LogOut</p>
-                        </a>
-                      </li>
-                      
+                      </li>                      
                     </ul>
                   </div>
                 </div>
