@@ -13,177 +13,222 @@
 </head>
 
 <body>
-
-  <div class="row">
-    <div class="col-2">
-      <a class="navbar-brand" href="index.html">
-        <a class="navbar-brand" href="index.html"><img class="logo" src="http://localhost:1802/api/productImage/logo"
-            alt="logo"></a>
-      </a>
-    </div>
-    <div class="col-6 d-flex justify-content-end py-3 ">
-
-      <form class="buscador" id="buscador" role="search" onkeyup="barra_search()">
-        <input id="buscador-input" type="" placeholder="¿Qué producto estás buscando...?" aria-label="Search">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icon-navbar"
-          viewBox="0 0 16 16">
-          <path
-            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-        </svg>
-      </form>
-    </div>
-    <div class="col-3 ">
-
-      <div class="row">
-        <nav class="navbar navbar-expand-lg">
-          <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-              aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page">
-                    <i class="bi bi-heart d-flex justify-content-center" style="color: #009929;"></i>
-                    <p style="color: black;">Mis Favoritos</p>
-                  </a>
-                </li>
-
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-person-circle d-flex justify-content-center" style="color: #009929;"></i>
-
-                    <p style="color: black;">Mi cuenta</p>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Mi cuenta</a></li>
-                    <li><a class="dropdown-item" href="/favoritos">Mis favoritos</a></li>
-                    <li><a class="dropdown-item">Mi carrito</a></li>
-                    <li><a routerLink='/login' class="dropdown-item" *ngIf="!estaLogueado()">Entrar</a></li>
-                    <li><a routerLink='/register' class="dropdown-item" *ngIf="!estaLogueado()">Crear una cuenta</a>
-                    </li>
-                    <li><a routerLink='/index' class="dropdown-item" *ngIf="estaLogueado()" (click)="onLogout()">Cerrar
-                        sesión</a></li>
-                  </ul>
-                </li>
-
-                <li class="nav-item">
-                  <a class="nav-link" onclick="mi_carrito()" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <i class="bi bi-basket3 d-flex justify-content-center " style="color: #009929;"></i>
-                    <p style="color: black;">Mi carrito</p>
-                  </a>
-                </li>
+  <nav class="navbar navbar-light navbar-expand-md py-3">
+      <div class="container-fluid">
+          <div style="width: 20%;height: auto;"><img routerLink="/index"  style="width: 100%" width="376" height="120" src="http://localhost:1802/api/productImage/logo" class="btnhover"></div><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navcol-2">
+              <ul class="navbar-nav ms-auto">
+                  <li class="nav-item"></li>
+                  <li class="nav-item"></li>
+                  <li class="nav-item"></li>
               </ul>
-            </div>
+              <div style="width: 60%;height: 40%;border-radius: 40px;border-style: solid;border-color: #009929;"><input type="text" id="searchInput" style="width: 95%;height: 100%;border-radius: 40px;border: 2px none #009929;margin-left: 10px;" placeholder="¿Qué producto estás buscando...?"></div><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-search" style="font-size: 30px;color: #009929;">
+                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+              </svg>
+              <ul class="navbar-nav ms-auto">
+                  <li class="nav-item"></li>
+                  <li class="nav-item"></li>
+                  <li class="nav-item"></li>
+              </ul>
+              <div>
+                  <div class="row">
+                      <div class="col" style="text-align: center;"><svg routerLink="/favoritos" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-heart btnhover" style="font-size: 25px;color: #009929;">
+                              <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
+                          </svg></div>
+                      <div class="col" style="text-align: center;width: 110.4844px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-person-circle" style="font-size: 37px;color: #009929;width: 25px;height: 25px;">
+                              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
+                              <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"></path>
+                          </svg></div>
+                      <div class="col" style="text-align: center;width: 110.4844px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-basket3" style="font-size: 37px;color: #009929;width: 25px;height: 25px;">
+                              <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM3.394 15l-1.48-6h-.97l1.525 6.426a.75.75 0 0 0 .729.574h9.606a.75.75 0 0 0 .73-.574L15.056 9h-.972l-1.479 6h-9.21z"></path>
+                          </svg></div>
+                  </div>
+                  <div class="row">
+                      <div class="col-4" style="text-align: center;padding-left: 0px;padding-right: 0px;width: 110.4844px;"><a routerLink="/favoritos" style="color: var(--bs-navbar-active-color);font-size: 16px;">Mis Favoritos</a></div>
+                      <div class="col" style="text-align: center;width: 110.4844px;">
+                          <div class="dropdown"><a class="dropdown" aria-expanded="false" data-bs-toggle="dropdown" id="cuentaDropdown" href="#" style="color: var(--bs-navbar-active-color);text-align: center;font-size: 16px;">Mi cuenta</a>
+                              <div class="dropdown-menu"><a class="dropdown-item cuentaDrop" style="border-bottom: 1px solid var(--bs-gray-500) ;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-person-fill">
+                                          <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+                                      </svg>Mi Cuenta</a><a class="dropdown-item cuentaDrop" routerLink="/favoritos" style="border-bottom: 1px solid var(--bs-gray-500) ;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-heart">
+                                          <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
+                                      </svg>Mis Favoritos</a><a class="dropdown-item cuentaDrop" href="#" style="border-bottom: 1px solid var(--bs-gray-500) ;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-check2">
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
+                                      </svg>Mi carrito</a>
+                                      <a class="dropdown-item cuentaDrop" *ngIf="!estaLogueado()" routerLink="/login" style="border-bottom: 1px solid var(--bs-gray-500) ;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-lock-fill">
+                                          <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"></path>
+                                      </svg>Entrar</a>
+
+                                      <a class="dropdown-item cuentaDrop" (click)="onLogout()" *ngIf="estaLogueado()" routerLink="/login" style="border-bottom: 1px solid var(--bs-gray-500) ;"><i class="bi bi-box-arrow-right"></i>Logout</a>
+
+                                      <a class="dropdown-item cuentaDrop btnhover" *ngIf="!estaLogueado()" routerLink="/register" style="border-bottom: 1px none var(--bs-gray-500) ;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-person-plus-fill">
+                                          <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+                                          <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"></path>
+                                      </svg>Crear una Cuenta</a></div>
+                          </div>
+                      </div>
+                      <div class="col" style="text-align: center;padding-left: 2px;padding-right: 1px;width: 110.4844px;"><a id="btn-carrito" href="#" style="color: var(--bs-navbar-active-color);font-size: 16px;">Mi carrito</a></div>
+                  </div>
+              </div>
           </div>
-        </nav>
       </div>
-
-    </div>
-  </div>
-
-
-
-
-  <div class="container" id="main" style="display:flex;">
-    <div class="row">
-      <div class="col-12 col-md-12">
-        <div class="container" id="filtro">
-          <div class="row py-3 px-3">
-            <h2 id="filtro-precio">Precio</h2>
-          </div>
-          <div class="row py-3 px-3">
-            <input type="range" class="input-range-precio" name="price-max" id="input-range-precio" value="" min="0"
-              max="">
+  </nav>
+  <div class="row">
+      <div class="col-2" style="margin-left: 20px;">
+          <div class="row">
+              <h1>Precio</h1>
           </div>
           <div class="row">
-            <div class="col py-3 px-4">
-              <div class="row">
-                <span>DESDE</span>
-              </div>
-              <div class="row">
-                <input type="number" class="precio-input" disabled value="0">
-              </div>
-            </div>
-            <div class="col py-3 px-3">
-              <div class="row">
-                <span>DE</span>
-              </div>
-              <div class="row">
-                <input type="number" class="precio-input" id="precio-max" disabled value="0">
-              </div>
-            </div>
+              <div class="col"><input class="form-range" type="range"></div>
           </div>
-          <div class="row" onclick="filtrar()">
-            <button class="boton btn-verde" id="filtrar">Filtrar</button>
+          <div class="row">
+              <div class="col" style="width: 100%;">
+                  <p style="color: var(--bs-black);font-size: 20px;width: 100%;">Desde</p>
+              </div>
+              <div class="col" style="width: 100%;">
+                  <p style="color: var(--bs-black);font-size: 20px;width: 100%;">De</p>
+              </div>
           </div>
-        </div>
+          <div class="row">
+              <div class="col" style="text-align: center;width: 100%;height: auto;"><input disabled type="number" style="width: 100%;height: 200%;text-align: center;" min="0"></div>
+              <div class="col" style="width: 100%;height: auto;"><input disabled type="number" style="width: 100%;height: 200%;text-align: center;" max="100"></div>
+          </div>
+          <div class="row" style="margin-right: 0px;margin-left: 0px;margin-top: 38px;"><button class="btn boton" type="button">Filtrar</button></div>
       </div>
-    </div>
-
-<!--*ngFor="let item of product | paginate: { itemsPerPage: 12, currentPage: p }-->
-    <div style="display:flex;" >
-      <div id="vitrina"></div>
-
-    </div>
-
-
-
-
+      <div class="col-9" id="vitrina" style="padding-left: 70px;">
     
-  </div>
-
-
-
-  <div class="list" style="color:#009929; position:flex; margin-left:30%">
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
-  </div>
-  <div class="row py-2">
-    <div class="col d-flex justify-content-center  py-3 mx-3">
-      <nav aria-label="Page navigation example">
-        <ul class="pagination">
-
-        </ul>
-      </nav>
-    </div>
-  </div>
-
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-
-          <div id="info"></div>
-        </div>
       </div>
-    </div>
   </div>
-
-  <div class="modal fade" id="carrito" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog ">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-
-          <div id="info_carrito"></div>
-        </div>
+  <div>
+      <div class="row">
+          <div class="col justify-content-center d-flex">
+              <nav style="color: #009929;text-align: center;">
+                  <ul class="pagination">
+                      <li class="page-item" style="color: #009929;"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
+                      <li class="page-item" style="text-align: center;"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item"><a class="page-link" href="#">4</a></li>
+                      <li class="page-item"><a class="page-link" href="#">5</a></li>
+                      <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+                  </ul>
+              </nav>
+          </div>
       </div>
-    </div>
   </div>
+  <div class="modal fade" role="dialog" tabindex="-1" id="modal-product">
+      <div class="modal-dialog modal-xl" role="document">
+          <div class="modal-content">
+              <div class="modal-header" style="border-style: none;border-color: var(--bs-purple);"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+              <div class="modal-body">
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-md-6"><img style="width: 100%;height: 100%;"></div>
+                          <div class="col-md-6">
+                              <div class="row" style="margin-bottom: 10px;">
+                                  <div class="col-xxl-10">
+                                      <h5 class="modal-title fw-bold" style="font-family: Roboto, sans-serif;">Parches de Oro de 24 kt Rejuvenecedores para Contorno de Ojos</h5>
+                                  </div>
+                                  <div class="col" style="text-align: center;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-heart-fill" style="text-align: center;font-size: 32px;padding-top: 0px;margin-top: 10px;">
+                                          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
+                                      </svg></div>
+                              </div>
+                              <div class="row">
+                                  <div class="col">
+                                      <h4 style="font-weight: bold;color: #50565c;font-size: 20px;">60UDS.</h4>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col">
+                                      <h4 class="fw-bold" style="color: #009929;font-weight: bold;">15,50 E</h4>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col">
+                                      <p>Sale a: 0,26 e/ud.</p>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col">
+                                      <p>El aceite esencial de clavo es conocido por sus increíbles propiedades antimicrobianas, antimicóticas, antisépticas, antivirales, afrodisíacas y estimulantes. Perfecto para utilizar en tus mezclas de Cosmética Natural, añadiendo unas cuantas gotas en tu crema corporal o aceite vegetal, conseguirás nutrir y lucir una piel radiante y 100% cuidad.<br><br></p>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-xxl-4" style="text-align: center;"><input type="number" style="text-align: center;width: 40%;height: 100%;color: #009929;"></div>
+                                  <div class="col" style="text-align: center;"><button class="btn btn-primary boton" type="button" style="width: 70%;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-bag-plus">
+                                              <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"></path>
+                                              <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"></path>
+                                          </svg>&nbsp;Añadir a la cesta</button></div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="modal fade" role="dialog" tabindex="-1" id="modal-carrito">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header" style="border-style: none;border-color: var(--bs-purple);border-bottom-style: solid;border-bottom-color: var(--bs-gray-500);">
+                  <h4 id="modal-tittle-carrito" style="color: #009929;">MI CARRITO (3)</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body" id="modal-body-carrito">
+                  <div class="row" style="border-style: none;border-color: var(--bs-purple);border-bottom: 1px solid var(--bs-gray-500) ;">
+                      <div class="col-xxl-3"><img width="100" height="80" style="width: 100%;height: 90%;"></div>
+                      <div class="col">
+                          <div class="row">
+                              <div class="col-xxl-9">
+                                  <h6><br><strong>Aceite corporal de almendras dulces</strong><br><br></h6>
+                              </div>
+                              <div class="col" style="text-align: right;"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-x" style="font-size: 39px;color: var(--bs-secondary);">
+                                          <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
+                                      </svg></a></div>
+                          </div>
+                          <div class="row">
+                              <div class="col">
+                                  <p style="color: var(--bs-gray-700);font-weight: bold;">500ML</p>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col">
+                                  <p style="color: var(--bs-gray-700);font-weight: bold;">Cantidad:</p>
+                              </div>
+                              <div class="col"><input type="number" style="width: 100%;"></div>
+                              <div class="col">
+                                  <p style="color: var(--bs-gray-700);font-weight: bold;">10,45 E</p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row" style="border-style: none;border-color: var(--bs-purple);border-bottom: 1px solid var(--bs-gray-500);padding-top: 10px;">
+                      <div class="col-xxl-9">
+                          <p style="color: var(--bs-gray-700);font-weight: bold;">Subtotal</p>
+                      </div>
+                      <div class="col">
+                          <p style="color: var(--bs-gray-700);font-weight: bold;">38,40 E</p>
+                      </div>
+                  </div>
+                  <div class="row" style="border-style: none;border-color: var(--bs-purple);border-bottom: 1px solid var(--bs-gray-500);padding-top: 10px;">
+                      <div class="col-xxl-9">
+                          <p style="color: #009929;font-weight: bold;">TOTAL (IVA incluido)</p>
+                      </div>
+                      <div class="col">
+                          <p style="color: #009929;font-weight: bold;">38,40 E</p>
+                      </div>
+                  </div>
+                  <div class="row" style="margin-bottom: 20px;margin-top: 20px;">
+                      <div class="col"><button class="btn btn-primary boton" type="button">Ir al carrito</button></div>
+                  </div>
+                  <div class="row">
+                      <div class="col"><button class="btn btn-primary boton" type="button">Realizar pedido</button></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
 
   <script src="scripts/scripts.js"></script>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
     crossorigin="anonymous"></script>

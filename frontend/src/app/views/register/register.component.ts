@@ -34,9 +34,19 @@ export class RegisterComponent implements OnInit {
 );
  
   ngOnInit(): void {
+    if(this.estaLogueado()){
+      this.router.navigate(['index']);
+    }
   }
 
-  
+  onLogout(){
+    localStorage.clear()
+    this.router.navigate(['index'])
+  }
+
+  estaLogueado(){
+      return localStorage.getItem('token');
+  }
 
   get f(){return this.registerForm.controls}
 

@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
     passwd : new FormControl('',Validators.required)
   })
 
+
   constructor(private api:ApiService, private router:Router) { }
   errorStatus:boolean = false;
   errorMsj:any = "";
@@ -50,16 +51,20 @@ export class LoginComponent implements OnInit {
 
     return localStorage.getItem('token')
   }
+  
 
   login(){
     return localStorage.getItem('token')
   }
 
-  logout(){
-    localStorage.removeItem('token')
+
+  onLogout(){
+    localStorage.clear()
     this.router.navigate(['index'])
   }
 
-  
+  estaLogueado(){
+      return localStorage.getItem('token');
+  }
 
 }

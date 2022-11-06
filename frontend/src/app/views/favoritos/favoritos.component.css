@@ -1,254 +1,180 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: WorkSans-Regular,Helvetica,Arial,sans-serif;
-  
-  }
-  
-  @media screen and (max-width: 640px) {
-    #ocultar{
-    display:none;
-    }
-    #filtro{
-      display: none;
-    }
-  }
-  
-  
-  
-  
-  .iconos{
-    width: 100%;
-    height: auto;
-    margin-left: 14px;
-  }
-  
-  
-  
-  .icon-navbar{
-    color: #009929;
-  }
-  
-  .logo{
-    width: 100%;
-    height: auto;
-  }
-  
-  .buscador{
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    border: 2px #009929 solid;
-    border-radius: 60px;
-    width: 75%;
-    height: 50%;
-    padding: 10px 20px;
-  
-  }
-  
-  
-  .buscador input{
-    background: none;
-    flex: 1;
-    border: 0;
-    outline: none;
-    font-size: 20px;
-    width: 100%;
-    
-  }
-  
-  
-  .boton{
-  width: 100%;
-  height: 50px;
-  border-radius: 60px;
-  border: none;
-  color: white;
-  font-size: 18px;
-  
-  }
-  
-  .btn-verde{
-  background-color: #009929;
-  
-  }
-  
-  .btn-verde:hover{
-  opacity: 0.7;
-  
-  }
-  
-  .btn-facebook{
-  background-color: rgb(86, 121, 187);
-  }
-  
-  .btn-naranja{
-  background-color: #efa229;
-  display: none;
-  width: 90%;
-  }
-  
-  
-  .precio-input{
-  width: 100px;
-  height: 50px;
+.product-item {
+  padding: 10px;
+}
+
+.btnhover:hover{
+  cursor: pointer;
+}
+
+.product-item .product-container {
+  text-align: left;
+  font: normal 14px sans-serif;
+  background-color: #ffffff;
+  border-radius: 3px;
+  padding: 25px;
+}
+
+.product-item a.product-image {
+  display: block;
   text-align: center;
-  }
-  
-  .logo{
-    width: 300px;
-    height: 100px;
-    margin-left: 50px;
-    border-radius: 15px;
-    
-    width: 100%;
-    height: auto;
-  }
-  
-  
-  .input-range-precio {
-  -webkit-appearance: none;
+  box-shadow: 0 0 20px 8px #f3f3f3 inset;
   width: 100%;
-  height: 5px; 
-  background-color: #009929;
+  margin-bottom: 25px;
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+.product-item a.product-image img {
+  height: 130px;
+}
+
+.product-item h2 {
+  font-size: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  font-weight: 800;
+}
+
+.product-item h2 a {
+  text-decoration: none;
+  color: #2b2b2b;
+}
+
+.product-item a.small-text {
+  color: #808080;
+  text-decoration: none;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  display: block;
+  text-align: right;
+  font-size: 12px;
+}
+
+.product-item .product-rating {
+  color: #f09911;
+  font-size: 14px;
+}
+
+.product-item .product-rating a.small-text {
+  text-align: left;
+  margin: 0 0 0 10px;
+  display: inline-block;
+}
+
+.product-item p.product-description {
+  margin-top: 20px;
+  color: #5d5d5d;
+  line-height: 1.45;
+  white-space: normal;
+  margin-bottom: 20px;
+}
+
+.product-item button {
+  border-radius: 2px;
+  background: #87bae1;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
+  border: 0;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 8px 20px;
+}
+
+.product-item button:active {
+  background: #87bae1;
+  color: #fff;
+  border: 0;
+}
+
+.product-item button:focus {
+  background: #87bae1;
+  outline: none;
+  color: #fff;
+}
+
+.product-item button:hover {
+  background: #66ABE0;
+  color: #fff;
+}
+
+.boton:hover {
+  border-color: #efa229;
+  background: #efa229;
+  color: black;
+}
+
+.boton:focus{
+  border-color: #009929;
+  background: #009929;
+  border-radius: 40px;
+  color: white;
+}
+
+.product-item button:focus:active {
+  background: #87bae1;
+  outline: none;
+  color: #fff;
+}
+
+.product-item .product-price {
+  color: #4e4e4e;
+  font-weight: bold;
+  font-size: 20px;
+  padding-top: 5px;
+  text-align: right;
+}
+
+.product-price {
+  color: #4e4e4e;
+  font-weight: bold;
+  font-size: 20px;
+  padding-top: 5px;
+  text-align: right;
+}
+
+.boton {
+  border-color: #009929;
+  background: #009929;
+  border-radius: 40px;
+  color: white;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit--appearance: none;
+  height: 18px;
+  width: 18px;
+  cursor: pointer;
+  border-radius: 50%;
+  background: #009921;
+  box-shadow: 0 0 2px 0 #555;
+  transition: background .3s ease-in-out;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  -webkit--appearance: none;
+  box-shadow: none;
+  border: none;
+  background: #009929;
+  height: 6px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
   appearance: none;
   outline: none;
-  }
-  
-  
-  .input-range-precio::-webkit-slider-thumb {
-  -webkit-appearance: none; 
-  border-radius: 60px;
-  width: 25px; 
-  height: 25px; 
-  background: #009929; 
-  cursor: pointer; 
-  }
-  
-  .producto {
-    width:280px;
-    text-align: center;
-    Font-family: WorkSans-Regular,Helvetica,Arial,sans-serif;
-    
-  }
-  
-  .titulo{
-    font-weight: 700;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-  
-  .producto p{
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    font-weight: 500;
-    font-size: 14px;
-  }
-  .texto-precio {
-    font-weight: 700;
-    color: #009929;
-    font-size: 22px;
-    
-  }
-  
-  .si{
-    display: flex;
-  }
-  .card:hover{
-    display: inline-block;
-  }
-  
-  .container{
-    position: left;
-    margin: 1%;
-  }
-  
-  .card:hover{
-    transform: scale(1.15);
-  }
-  
-  .card{
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    margin: 10%;
-    padding: 1%;
-    transform: 0.1s;
-    display: inline-block;
-  }
-  
-  .producto button:hover {
-    opacity: 0.7;
-  }
-  
-  
-  .prueba{
-  background-image: "src-eco-store/logo.jpg";
-  height:60px;
-  width:70px;
-  }
-  
-  .form{
-  width: 600px;
-  height: auto;
-  }
-  
-  .input-registro{
-  background-color: rgb(247, 246, 251);
-  }
-  
-  
-  
-  .input-login{
-  background: none;
-  flex: 1;
-  border: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+#searchInput {
   outline: none;
-  font-size: 20px;
-  width: 100%;
-  
-  }
-  
-  .input-contenedor {
-  display: flex;
-  width: 100%;
-  margin-bottom: 15px;
-  background-color: rgb(247, 246, 251);
-  }
-  
-  .icono-login{
-  width: auto;
-  height: auto;
-  }
-  
-  .me-gusta{
-  width: 20px;
-  height: auto;
-  position: relative;
-  left: 120px;
-  }
-  
-  input[type="checkbox"]:checked + .me-gusta{
-  fill:red;
-  
-  }
-  
-  .label-me-gusta{
-  display: none;
-  }
-  
-  #modal{
-  display: block;
-  }
-  
-  .btn-pag{
-  width: 50px;
-  height: 50px;
-  color: black;
-  margin: 0 5px 0 0;
-  }
-  
-  
-  
-  
+}
+
+#searchbar {
+  background: none;
+}
+
