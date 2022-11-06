@@ -40,6 +40,11 @@ export class ApiService {
     return this.http.get<FavI[]>(`${this.url}user/favoritos/`)
   }
 
+  postFavorito():Observable<FavI[]>{
+    let dir = this.url + 'user/favorites/';
+    return this.http.post<FavI[]>(dir,"")
+  }
+
 
   public get(url:string){
     return this.http.get(url)
