@@ -7,7 +7,9 @@ import { HeaderComponent } from './templates/header/header.component';
 import { FooterComponent } from './templates/footer/footer.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ErrorTailorModule } from '@ngneat/error-tailor'
+import { ErrorTailorModule } from '@ngneat/error-tailor';
+import { FavoritosComponent } from './views/favoritos/favoritos.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 //import { LoginComponent } from './views/login/login.component';
 //import { RegisterComponent } from './views/register/register.component';
 //import { IndexComponent } from './views/index/index.component';
@@ -19,6 +21,8 @@ import { ErrorTailorModule } from '@ngneat/error-tailor'
     HeaderComponent,
     FooterComponent,
     routingComponents,
+    FavoritosComponent,
+
     //LoginComponent,
     //RegisterComponent,
     //IndexComponent,
@@ -30,6 +34,7 @@ import { ErrorTailorModule } from '@ngneat/error-tailor'
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    NgxPaginationModule,
     ErrorTailorModule.forRoot({
       errors: {
         useValue:{
@@ -41,6 +46,7 @@ import { ErrorTailorModule } from '@ngneat/error-tailor'
       }
     })
   ],
+  
   providers: [],
   bootstrap: [AppComponent]
 })

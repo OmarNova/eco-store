@@ -5,6 +5,7 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ProductsI } from '../../models/product.interfaces';
 import { registerI } from '../../models/register.interface';
+import { FavI } from '../../models/fav.interface';
 
 
 @Injectable({
@@ -33,6 +34,10 @@ export class ApiService {
 
   getProduct():Observable<ProductsI[]>{
     return this.http.get<ProductsI[]>(`${this.url}product/`)
+  }
+
+  getFavorito():Observable<FavI[]>{
+    return this.http.get<FavI[]>(`${this.url}user/favoritos/`)
   }
 
 

@@ -4,32 +4,27 @@ import { ProductsI } from '../../models/product.interfaces';
 import { LoginComponent } from '../login/login.component';
 import { Router } from '@angular/router';
 import { Token } from '@angular/compiler';
-import { NgxPaginationModule } from 'ngx-pagination';
-
+import { FavI } from '../../models/fav.interface';
 
 
 @Component({
-  selector: 'app-index',
-  templateUrl: './index.component.html',
-  styleUrls: ['./index.component.css']
+  selector: 'app-favoritos',
+  templateUrl: './favoritos.component.html',
+  styleUrls: ['./favoritos.component.css']
 })
-export class IndexComponent implements OnInit {
+export class FavoritosComponent implements OnInit {
 
-  p: number = 1;
-  product: ProductsI[] = [];
-  constructor(private api:ApiService, private router:Router) { 
-    for (let i = 1; i <= 100; i++){
-      
-    }
-  }
+  constructor(private api:ApiService, private router:Router) { }
 
   ngOnInit(): void {
-
-    this.api.getProduct().subscribe( (data: ProductsI[]) => (this.product = data, this.dataProducts(data)));
-    console.log(this.product);
+    this.api.getProduct().subscribe( (data: ProductsI[]) => (this.favi = data, this.dataProducts(data)));
+    console.log(this.favi);
   }
 
-  dataProducts(data:ProductsI[]) : void{
+  favi: FavI[] = [];
+
+
+  dataProducts(data:FavI[]) : void{
     const vitrina = document.getElementById("vitrina") 
     if(vitrina){
       let i = 0;
@@ -102,8 +97,6 @@ export class IndexComponent implements OnInit {
 
     return col;
   }
-
-
   onLogout(){
     localStorage.clear()
     this.router.navigate(['index'])
