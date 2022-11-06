@@ -103,10 +103,11 @@ export class FavoritosComponent implements OnInit {
   }
 
   estaLogueado(){
-
       return localStorage.getItem('token');
-    
-
   }
 
+  favorito(){
+    return localStorage.getItem('token');
+    
+  }
 }
