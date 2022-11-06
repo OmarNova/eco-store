@@ -40,9 +40,9 @@ export class ApiService {
     return this.http.get<FavI[]>(`${this.url}user/favoritos/`)
   }
 
-  postFavorito():Observable<FavI[]>{
+  postFavorito(product: any, httpOptions: any):Observable<any>{
     let dir = this.url + 'user/favorites/';
-    return this.http.post<FavI[]>(dir,"")
+    return this.http.post<any>(dir,product,httpOptions);
   }
 
 

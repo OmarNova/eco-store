@@ -4,7 +4,8 @@ import { ProductsI } from '../../models/product.interfaces';
 import { LoginComponent } from '../login/login.component';
 import { Router } from '@angular/router';
 import { Token } from '@angular/compiler';
-import { NgxPaginationModule } from 'ngx-pagination';
+import { HttpHeaders } from '@angular/common/http';
+//import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -26,7 +27,6 @@ export class IndexComponent implements OnInit {
   ngOnInit(): void {
 
     this.api.getProduct().subscribe( (data: ProductsI[]) => (this.product = data, this.dataProducts(data)));
-    console.log(this.product);
   }
 
   dataProducts(data:ProductsI[]) : void{
@@ -91,6 +91,12 @@ export class IndexComponent implements OnInit {
     comprar.classList.add("btn-primary");
     comprar.setAttribute("style", "background-color: #5ccb5f; border-color: #5ccb5f; font-weight: bold; width:100%;");
     comprar.innerHTML = "Comprar";
+    //comprar.setAttribute("(click)",`favorito(${product._id})`);
+
+    comprar.addEventListener('click',() => {
+      this.favorito(product._id);
+    })
+
 
     divBodyProduct.appendChild(title);
     divBodyProduct.appendChild(contenido);
@@ -115,5 +121,23 @@ export class IndexComponent implements OnInit {
     
 
   }
+
+  favorito(idProduct: string){
+    const token = this.estaLogueado();
+    if(token){
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'authorization': token
+        })
+      }
+
+      this.api.postFavorito({idProduct: idProduct},httpOptions).subscribe();
+      
+    }
+
+    
+    
+  }
+  
 
 }

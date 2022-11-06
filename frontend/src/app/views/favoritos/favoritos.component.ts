@@ -5,6 +5,7 @@ import { LoginComponent } from '../login/login.component';
 import { Router } from '@angular/router';
 import { Token } from '@angular/compiler';
 import { FavI } from '../../models/fav.interface';
+import { HttpHeaders } from '@angular/common/http';
 
 
 @Component({
@@ -86,6 +87,10 @@ export class FavoritosComponent implements OnInit {
     comprar.classList.add("btn-primary");
     comprar.setAttribute("style", "background-color: #5ccb5f; border-color: #5ccb5f; font-weight: bold; width:100%;");
     comprar.innerHTML = "Comprar";
+    comprar.setAttribute("onclick",`favorito(${product._id})`);
+    //comprar.addEventListener("click",function favorito(product: string){
+
+    //},false);
 
     divBodyProduct.appendChild(title);
     divBodyProduct.appendChild(contenido);
@@ -106,7 +111,20 @@ export class FavoritosComponent implements OnInit {
       return localStorage.getItem('token');
   }
 
-  favorito(){
+  favorito(idProduct: any){
+    const token = this.estaLogueado();
+    if(token){
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          'authorization': token
+        })
+      }
+
+      this.api.postFavorito({idProduct: idProduct},httpOptions).subscribe();
+
+    }
+
     return localStorage.getItem('token');
     
   }
