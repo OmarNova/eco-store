@@ -755,8 +755,13 @@ export class IndexComponent implements OnInit {
   saveProduct(id: string){
     this.api.getProductById(id).subscribe((data:any)=>{
       console.log(data);
+      
+      let si = localStorage.setItem("producto", JSON.stringify(data));
       //localStorage.setItem('id',data)
     });
+
     //localStorage.setItem('id',data(this.dataProducts))
   }
+
+
 }
