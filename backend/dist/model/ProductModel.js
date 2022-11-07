@@ -24,26 +24,154 @@ class ProductModel {
             this.mongoDBC.connection();
             const query = ".*" + consulta + "*.";
             const product = yield this.mongoDBC.product.find({ "nombre": { "$regex": query, "$options": "i" } });
-            return product;
+            let result = [];
+            for (let index = 0; index < 12; index++) {
+                if (typeof product[index] == "undefined") {
+                    break;
+                }
+                result.push(product[index]);
+            }
+            return { product: result, length: product.length };
         });
         this.getProductById = (consulta) => __awaiter(this, void 0, void 0, function* () {
             this.mongoDBC.connection();
             const product = yield this.mongoDBC.product.findOne({ _id: consulta });
             return product;
         });
+        this.getProductPrice = (precio) => __awaiter(this, void 0, void 0, function* () {
+            this.mongoDBC.connection();
+            const product = yield this.mongoDBC.product.find({ "precio": { "$lte": precio } });
+            let result = [];
+            for (let index = 0; index < 12; index++) {
+                if (typeof product[index] == "undefined") {
+                    break;
+                }
+                result.push(product[index]);
+            }
+            return { product: result, length: product.length };
+        });
+        this.getProductSearchPrice = (consulta, precio) => __awaiter(this, void 0, void 0, function* () {
+            this.mongoDBC.connection();
+            const query = ".*" + consulta + "*.";
+            const product = yield this.mongoDBC.product.find({ "nombre": { "$regex": query, "$options": "i" }, "precio": { "$lte": precio } });
+            let result = [];
+            for (let index = 0; index < 12; index++) {
+                if (typeof product[index] == "undefined") {
+                    break;
+                }
+                result.push(product[index]);
+            }
+            return { product: result, length: product.length };
+        });
         this.getProductsPage = (page) => __awaiter(this, void 0, void 0, function* () {
             this.mongoDBC.connection();
             let final = page * 12;
             let inicio = final - 12;
             if (page == 1) {
-                const product = yield this.mongoDBC.product.find().limit(12);
-                return product;
+                const product = yield this.mongoDBC.product.find();
+                let result = [];
+                for (let index = 0; index < 12; index++) {
+                    if (typeof product[index] == "undefined") {
+                        break;
+                    }
+                    result.push(product[index]);
+                }
+                return { product: result, length: product.length };
             }
             else {
-                const product = yield this.mongoDBC.product.find().skip(inicio).limit(final);
-                return product;
+                const product = yield this.mongoDBC.product.find();
+                let result = [];
+                for (let index = inicio; index < final; index++) {
+                    if (typeof product[index] == "undefined") {
+                        break;
+                    }
+                    result.push(product[index]);
+                }
+                return { product: result, length: product.length };
             }
-            return null;
+        });
+        this.getProductsPageSearch = (Search, page) => __awaiter(this, void 0, void 0, function* () {
+            this.mongoDBC.connection();
+            let final = page * 12;
+            let inicio = final - 12;
+            const query = ".*" + Search + "*.";
+            if (page == 1) {
+                const product = yield this.mongoDBC.product.find({ "nombre": { "$regex": query, "$options": "i" } });
+                let result = [];
+                for (let index = 0; index < 12; index++) {
+                    if (typeof product[index] == "undefined") {
+                        break;
+                    }
+                    result.push(product[index]);
+                }
+                return { product: result, length: product.length };
+            }
+            else {
+                const product = yield this.mongoDBC.product.find({ "nombre": { "$regex": query, "$options": "i" } });
+                let result = [];
+                for (let index = inicio; index < final; index++) {
+                    if (typeof product[index] == "undefined") {
+                        break;
+                    }
+                    result.push(product[index]);
+                }
+                return { product: result, length: product.length };
+            }
+        });
+        this.getProductsPagePrice = (precio, page) => __awaiter(this, void 0, void 0, function* () {
+            this.mongoDBC.connection();
+            let final = page * 12;
+            let inicio = final - 12;
+            if (page == 1) {
+                const product = yield this.mongoDBC.product.find({ "precio": { "$lte": precio } });
+                let result = [];
+                for (let index = 0; index < 12; index++) {
+                    if (typeof product[index] == "undefined") {
+                        break;
+                    }
+                    result.push(product[index]);
+                }
+                return { product: result, length: product.length };
+            }
+            else {
+                const product = yield this.mongoDBC.product.find({ "precio": { "$lte": precio } });
+                let result = [];
+                for (let index = inicio; index < final; index++) {
+                    if (typeof product[index] == "undefined") {
+                        break;
+                    }
+                    result.push(product[index]);
+                }
+                return { product: result, length: product.length };
+            }
+        });
+        this.getProductsPagePriceSearch = (search, precio, page) => __awaiter(this, void 0, void 0, function* () {
+            this.mongoDBC.connection();
+            let final = page * 12;
+            let inicio = final - 12;
+            const query = ".*" + search + "*.";
+            if (page == 1) {
+                const product = yield this.mongoDBC.product.find({ "nombre": { "$regex": query, "$options": "i" }, "precio": { "$lte": precio } });
+                let result = [];
+                for (let index = 0; index < 12; index++) {
+                    if (typeof product[index] == "undefined") {
+                        break;
+                    }
+                    result.push(product[index]);
+                }
+                return { product: result, length: product.length };
+            }
+            else {
+                const product = yield this.mongoDBC.product.find({ "nombre": { "$regex": query, "$options": "i" }, "precio": { "$lte": precio } });
+                let result = [];
+                for (let index = inicio; index < final; index++) {
+                    if (typeof product[index] == "undefined") {
+                        break;
+                    }
+                    result.push(product[index]);
+                }
+                return { product: result, length: product.length };
+            }
         });
         this.mongoDBC = new MongoDBC_1.default();
     }

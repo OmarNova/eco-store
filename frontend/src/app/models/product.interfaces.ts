@@ -1,4 +1,4 @@
-export interface ProductsI{
+export interface dataProducts{
     _id:number;
     nombre: string;
     contenido: string;
@@ -7,5 +7,11 @@ export interface ProductsI{
     sale: string;
     img: string;
     Descripcion: string;
+
+}
+
+export interface ProductsI{
+    product: dataProducts[];
+    length: number;
 
 }

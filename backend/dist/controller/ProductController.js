@@ -18,40 +18,72 @@ const fs_1 = __importDefault(require("fs"));
 class ProductController {
     constructor() {
         this.index = (req, res) => res.json({ 'error': 0, 'msg': 'API: node-express-ts' });
-        this.getProduct = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const product = yield this.model.getProducts();
-            if (product) {
-                return res.send(product);
-            }
-            return res.json({ 'error': 1, 'msg': 'API: id no found' });
-        });
-        this.getProductPage = (req, res) => __awaiter(this, void 0, void 0, function* () {
+        this.getProductById = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const product = yield this.model.getProductsPage(parseInt(id));
-            if (product) {
-                return res.send(product);
-            }
-            return res.json({ 'error': 1, 'msg': 'API: id no found' });
+            const product = yield this.model.getProductById(id);
+            return res.json(product);
         });
-        this.getProductRange = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const precio_inicial = req.query.priceinit;
-            const precio_final = req.query.pricefinal;
-            const product = yield this.model.getProducts();
-            if (product) {
-                return res.send(product);
-            }
-            return res.json({ 'error': 1, 'msg': 'API: id no found' });
-        });
-        this.getProductSearch = (req, res) => __awaiter(this, void 0, void 0, function* () {
+        this.getProduct = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const page = parseInt(req.query.page);
+            const precio = parseInt(req.query.price);
             const search = req.query.search;
-            if (!search) {
-                return this.getProduct(req, res);
+            if (search && page && precio) {
+                const product = yield this.model.getProductsPagePriceSearch(search, precio, page);
+                if (product) {
+                    return res.json(product);
+                }
             }
-            const product = yield this.model.getProductSearch(search);
+            if (page && precio) {
+                const product = yield this.model.getProductsPagePrice(precio, page);
+                if (product) {
+                    return res.json(product);
+                }
+            }
+            if (search && precio) {
+                const product = yield this.model.getProductSearchPrice(search, precio);
+                if (product) {
+                    return res.json(product);
+                }
+            }
+            if (search && page) {
+                const product = yield this.model.getProductsPageSearch(search, page);
+                if (product) {
+                    return res.json(product);
+                }
+            }
+            if (page) {
+                const product = yield this.model.getProductsPage(page);
+                if (product) {
+                    return res.json(product);
+                }
+            }
+            if (precio) {
+                const product = yield this.model.getProductPrice(precio);
+                if (product) {
+                    return res.json(product);
+                }
+            }
+            if (search) {
+                const product = yield this.model.getProductSearch(search);
+                if (product) {
+                    return res.json(product);
+                }
+            }
+            const product = yield this.model.getProductsPage(1);
             if (product) {
-                return res.send(product);
+                return res.json(product);
             }
             return res.json({ 'error': 1, 'msg': 'API: id no found' });
+        });
+        this.getProductPriceMax = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const product = yield this.model.getProducts();
+            let precio = 0;
+            for (let index = 0; index < product.length; index++) {
+                if (precio < product[index].precio) {
+                    precio = product[index].precio;
+                }
+            }
+            res.json({ precioMax: Math.ceil(precio) });
         });
         this.getImageProduct = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;

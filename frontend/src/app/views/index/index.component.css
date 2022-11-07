@@ -2,6 +2,10 @@
   padding: 10px;
 }
 
+.btnhover{
+  cursor: pointer;
+}
+
 .btnhover:hover{
   cursor: pointer;
 }
@@ -12,6 +16,11 @@
   background-color: #ffffff;
   border-radius: 3px;
   padding: 25px;
+}
+
+.product-item:hover{
+  border: 1px solid #dbe3e7;
+  box-shadow: 1px 3px 1px rgba(0, 0, 0, 0.08);
 }
 
 .product-item a.product-image {
@@ -71,40 +80,6 @@
   margin-bottom: 20px;
 }
 
-.product-item button {
-  border-radius: 2px;
-  background: #87bae1;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
-  border: 0;
-  color: #ffffff;
-  font-weight: bold;
-  font-size: 13px;
-  padding: 8px 20px;
-}
-
-.product-item button:active {
-  background: #87bae1;
-  color: #fff;
-  border: 0;
-}
-
-.product-item button:focus {
-  background: #87bae1;
-  outline: none;
-  color: #fff;
-}
-
-.product-item button:hover {
-  background: #66ABE0;
-  color: #fff;
-}
-
-.product-item button:focus:active {
-  background: #87bae1;
-  outline: none;
-  color: #fff;
-}
-
 .product-item .product-price {
   color: #4e4e4e;
   font-weight: bold;
@@ -123,14 +98,14 @@
 
 .boton {
   border-color: #009929;
-  background: #009929;
+  background-color: #009929;
   border-radius: 40px;
   color: white;
 }
 
 .boton:focus{
   border-color: #009929;
-  background: #009929;
+  background-color: #009929;
   border-radius: 40px;
   color: white;
 }

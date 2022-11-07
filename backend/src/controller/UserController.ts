@@ -30,7 +30,6 @@ class UserController {
                             const a = await productModel.getProductById(rows[index].productos_idproductos);
                             data.push(a);
                         }
-
                         return res.json({ error: false, message: "Ok", data: data });
                     }else{
                         return res.json({ error: true, message: "Not Favorites" });
@@ -70,25 +69,23 @@ class UserController {
 
     public deleteFavorites = (req: Request, res: Response) => {
 
-        if(JSON.stringify(req.body) != "{}") {
-            const email = req.params.email;
-            const idProduct = req.body.idProduct;
-            this.model.getUser(email, (error: any, rows: any) => {
-                if (error) {console.error(error);return { error: true, message: 'error database' };}   
-    
-                if (rows.length != 0) {
-                    this.model.deleteFavorites(rows[0].id, idProduct , async (error: any, rows: any) => {
-                        if (error) {console.error(error);return { error: true, message: 'error database' };}
-                        return res.json({error: false, message: "Ok"});
-                    });
-                    
-                } else {
-                    return res.status(404).json({ error: true, message: 'User not Found' });
-                }
-            });
-        } else {
-            return res.status(404).json({ error: true, message: 'Data not found' });
-        }
+        
+        const email = req.params.email;
+        const {idProduct} = req.params;
+        this.model.getUser(email, (error: any, rows: any) => {
+            if (error) {console.error(error);return { error: true, message: 'error database' };}   
+
+            if (rows.length != 0) {
+                this.model.deleteFavorites(rows[0].id, idProduct , async (error: any, rows: any) => {
+                    if (error) {console.error(error);return { error: true, message: 'error database' };}
+                    return res.json({error: false, message: "Ok"});
+                });
+                
+            } else {
+                return res.status(404).json({ error: true, message: 'User not Found' });
+            }
+        });
+      
     }
 
     public getUser =  (email: string, fn: Function) => {
@@ -152,7 +149,7 @@ class UserController {
                             console.error(error);
                             return res.json({ error: true, message: 'Error in database' });
                         } else if (rows) {
-                            const token = jwt.sign({email: req.body.email}, config.jwt.key,{expiresIn: 3600});   
+                            const token = jwt.sign({email: req.body.email}, config.jwt.key);   
                             return res.json({ error: false, message: token }); 
                         }else{
                             return res.json({ error: true, message: 'Password incorrect' });

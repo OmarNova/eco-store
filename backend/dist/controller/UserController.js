@@ -79,31 +79,26 @@ class UserController {
             }
         };
         this.deleteFavorites = (req, res) => {
-            if (JSON.stringify(req.body) != "{}") {
-                const email = req.params.email;
-                const idProduct = req.body.idProduct;
-                this.model.getUser(email, (error, rows) => {
-                    if (error) {
-                        console.error(error);
-                        return { error: true, message: 'error database' };
-                    }
-                    if (rows.length != 0) {
-                        this.model.deleteFavorites(rows[0].id, idProduct, (error, rows) => __awaiter(this, void 0, void 0, function* () {
-                            if (error) {
-                                console.error(error);
-                                return { error: true, message: 'error database' };
-                            }
-                            return res.json({ error: false, message: "Ok" });
-                        }));
-                    }
-                    else {
-                        return res.status(404).json({ error: true, message: 'User not Found' });
-                    }
-                });
-            }
-            else {
-                return res.status(404).json({ error: true, message: 'Data not found' });
-            }
+            const email = req.params.email;
+            const { idProduct } = req.params;
+            this.model.getUser(email, (error, rows) => {
+                if (error) {
+                    console.error(error);
+                    return { error: true, message: 'error database' };
+                }
+                if (rows.length != 0) {
+                    this.model.deleteFavorites(rows[0].id, idProduct, (error, rows) => __awaiter(this, void 0, void 0, function* () {
+                        if (error) {
+                            console.error(error);
+                            return { error: true, message: 'error database' };
+                        }
+                        return res.json({ error: false, message: "Ok" });
+                    }));
+                }
+                else {
+                    return res.status(404).json({ error: true, message: 'User not Found' });
+                }
+            });
         };
         this.getUser = (email, fn) => {
             this.model.getUser(email, (error, rows) => {
@@ -172,7 +167,7 @@ class UserController {
                                 return res.json({ error: true, message: 'Error in database' });
                             }
                             else if (rows) {
-                                const token = jsonwebtoken_1.default.sign({ email: req.body.email }, config_1.default.jwt.key, { expiresIn: 3600 });
+                                const token = jsonwebtoken_1.default.sign({ email: req.body.email }, config_1.default.jwt.key);
                                 return res.json({ error: false, message: token });
                             }
                             else {

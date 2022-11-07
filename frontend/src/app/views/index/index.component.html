@@ -8,23 +8,24 @@
 
   <link rel="stylesheet" href="./index.component.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+ 
 </head>
 
 <body>
+
+    
   <nav class="navbar navbar-light navbar-expand-md py-3">
       <div class="container-fluid">
-          <div style="width: 20%;height: auto;"><img routerLink="/index"  style="width: 100%" width="376" height="120" src="http://localhost:1802/api/productImage/logo" class="btnhover"></div><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+          <div style="width: 20%;height: auto;"><img routerLink="/index" (click)="ngOnInit()" style="width: 100%" width="376" height="120" src="http://localhost:1802/api/productImage/logo" class="btnhover"></div><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
           <div class="collapse navbar-collapse" id="navcol-2">
               <ul class="navbar-nav ms-auto">
                   <li class="nav-item"></li>
                   <li class="nav-item"></li>
                   <li class="nav-item"></li>
               </ul>
-              <div style="width: 60%;height: 40%;border-radius: 40px;border-style: solid;border-color: #009929;"><input type="text" id="searchInput" style="width: 95%;height: 100%;border-radius: 40px;border: 2px none #009929;margin-left: 10px;" placeholder="¿Qué producto estás buscando...?"></div><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-search" style="font-size: 30px;color: #009929;">
-                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
-              </svg>
+              <div style="width: 60%;height: 40%;border-radius: 40px;border-style: solid;border-color: #009929;"><input type="text" id="searchInput" (input)="search()" style="width: 95%;height: 100%;border-radius: 40px;border: 2px none #009929;margin-left: 10px;" placeholder="¿Qué producto estás buscando...?"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-search" style="font-size: 20px;color: #009929;">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+            </svg></div>
               <ul class="navbar-nav ms-auto">
                   <li class="nav-item"></li>
                   <li class="nav-item"></li>
@@ -78,7 +79,7 @@
               <h1>Precio</h1>
           </div>
           <div class="row">
-              <div class="col"><input class="form-range" type="range"></div>
+              <div class="col"><input class="form-range" value="100" max="100" min="0" id="rangePrice" (input)="filterPrice()" type="range"></div>
           </div>
           <div class="row">
               <div class="col" style="width: 100%;">
@@ -89,10 +90,10 @@
               </div>
           </div>
           <div class="row">
-              <div class="col" style="text-align: center;width: 100%;height: auto;"><input disabled type="number" style="width: 100%;height: 200%;text-align: center;" min="0"></div>
-              <div class="col" style="width: 100%;height: auto;"><input disabled type="number" style="width: 100%;height: 200%;text-align: center;" max="100"></div>
+              <div class="col" style="text-align: center;width: 100%;height: auto;"><input disabled value="0" type="number" style="width: 100%;height: 200%;text-align: center;font-weight: bold;" min="0"></div>
+              <div class="col" style="width: 100%;height: auto;"><input id="textPrice" disabled type="number" style="width: 100%;height: 200%;text-align: center;font-weight: bold;" value="100" max="100"></div>
           </div>
-          <div class="row" style="margin-right: 0px;margin-left: 0px;margin-top: 38px;"><button class="btn boton" type="button">Filtrar</button></div>
+          <div class="row" style="margin-right: 0px;margin-left: 0px;margin-top: 38px;"><button (click)="filtrarPrecio()" class="btn boton" type="button">Filtrar</button></div>
       </div>
       <div class="col-9" id="vitrina" style="padding-left: 70px;">
     
@@ -102,14 +103,8 @@
       <div class="row">
           <div class="col justify-content-center d-flex">
               <nav style="color: #009929;text-align: center;">
-                  <ul class="pagination">
-                      <li class="page-item" style="color: #009929;"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
-                      <li class="page-item" style="text-align: center;"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item"><a class="page-link" href="#">4</a></li>
-                      <li class="page-item"><a class="page-link" href="#">5</a></li>
-                      <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+                  <ul class="pagination" id="paginacion">
+                     
                   </ul>
               </nav>
           </div>
@@ -121,7 +116,7 @@
               <div class="modal-header" style="border-style: none;border-color: var(--bs-purple);"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
               <div class="modal-body">
                   <div class="container">
-                      <div class="row">
+                      <div class="row" id="modal-product-body">
                           <div class="col-md-6"><img style="width: 100%;height: 100%;"></div>
                           <div class="col-md-6">
                               <div class="row" style="margin-bottom: 10px;">
@@ -229,9 +224,6 @@
 
 
   <script src="scripts/scripts.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-    crossorigin="anonymous"></script>
 
 
 </body>

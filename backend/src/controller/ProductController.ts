@@ -13,48 +13,84 @@ class ProductController {
 
     public index = (req: Request, res: Response) => res.json({ 'error': 0, 'msg': 'API: node-express-ts' });
 
+    public getProductById = async (req: Request, res: Response) => {
+        const { id } = req.params;
+        const product = await this.model.getProductById(id);
+        return res.json(product);
+    }
+
     public getProduct = async (req: Request, res: Response) => {
-        const product = await this.model.getProducts();
-        if (product) {
-            return res.send(product);
-        }
-        return res.json({ 'error': 1, 'msg': 'API: id no found' });
-    }
 
-    public getProductPage = async (req: Request, res: Response) => {
-        const { id } =  req.params;
-        const product = await this.model.getProductsPage(parseInt(id));
-
-        if (product) {
-            return res.send(product);
-        }
-        return res.json({ 'error': 1, 'msg': 'API: id no found' });
-    }
-
-    public getProductRange = async (req: Request, res: Response) => {
-        const precio_inicial = req.query.priceinit;
-        const precio_final = req.query.pricefinal;
-        const product = await this.model.getProducts();
-
-        if (product) {
-            return res.send(product);
-        }
-        return res.json({ 'error': 1, 'msg': 'API: id no found' });
-    }
-
-    public getProductSearch = async (req: Request, res: Response) => {
+        const page = parseInt(req.query.page as string);
+        const precio = parseInt(req.query.price as string);
         const search = req.query.search as string;
-
-        if(!search){
-            return this.getProduct(req,res);
+        if(search && page && precio){
+            const product = await this.model.getProductsPagePriceSearch(search,precio,page);
+            if (product) {
+                 return  res.json(product);
+            }
         }
-        
-        const product = await this.model.getProductSearch(search);
 
+        if(page && precio){
+            const product = await this.model.getProductsPagePrice(precio,page);
+            if (product) {
+                 return  res.json(product);
+            }
+        }
+
+        if(search && precio){
+            const product = await this.model.getProductSearchPrice(search,precio);
+            if (product) {
+                 return  res.json(product);
+            }
+        }
+
+        if(search && page){
+            const product = await this.model.getProductsPageSearch(search,page);
+            if (product) {
+                 return  res.json(product);
+            }
+        }
+
+        if(page){
+            const product = await this.model.getProductsPage(page);
+            if (product) {
+                 return  res.json(product);
+            }
+        }
+
+        if(precio){
+            const product = await this.model.getProductPrice(precio);
+            if (product) {
+                 return  res.json(product);
+            }
+        }
+
+        if(search){
+            const product = await this.model.getProductSearch(search);
+
+            if (product) {
+                 return  res.json(product);
+            }
+        }
+
+        const product = await this.model.getProductsPage(1);
         if (product) {
-            return res.send(product);
+             return  res.json(product);
         }
+
         return res.json({ 'error': 1, 'msg': 'API: id no found' });
+    }
+
+    public getProductPriceMax = async (req: Request, res: Response) => {
+        const product = await this.model.getProducts();
+        let precio = 0;
+        for (let index = 0; index < product.length; index++) {
+           if(precio < product[index].precio){
+            precio = product[index].precio;
+           } 
+        }
+        res.json({precioMax: Math.ceil(precio)});
     }
 
     public getImageProduct = async (req: Request, res: Response) => {

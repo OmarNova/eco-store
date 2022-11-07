@@ -18,7 +18,7 @@ class UserRoute {
 
         this.router.get('/user/favorites/', auth, this.UserController.getFavorites);
         this.router.post('/user/favorites/', auth, this.UserController.postFavorites);
-        this.router.delete('/user/favorites/', auth, this.UserController.deleteFavorites);
+        this.router.delete('/user/favorites/:idProduct', auth, this.UserController.deleteFavorites);
         
         this.router.get('/user/logout', this.UserController.logoutUser);
         this.router.post('/user/register', this.UserController.registerUser);

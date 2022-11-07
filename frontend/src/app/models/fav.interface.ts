@@ -1,4 +1,7 @@
-export interface FavI{
+
+
+
+interface productFavI{
     _id:number;
     nombre: string;
     contenido: string;
@@ -8,4 +11,10 @@ export interface FavI{
     img: string;
     Descripcion: string;
 
+}
+
+export interface FavI{
+    error: boolean;
+    message: string;
+    data?: productFavI;
 }

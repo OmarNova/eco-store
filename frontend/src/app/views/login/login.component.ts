@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api/api.service';
 import { LoginI } from '../../models/login.interface';
-import { Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { ResponseI } from '../../models/response.interface'
 
 @Component({
@@ -17,8 +17,14 @@ export class LoginComponent implements OnInit {
     passwd : new FormControl('',Validators.required)
   })
 
+  test() {
+    this.route.queryParams.subscribe((params:any) => {
+      console.log(params['page']); // { order: "popular" }
 
-  constructor(private api:ApiService, private router:Router) { }
+});
+  }
+
+  constructor(private api:ApiService, private router:Router, private route: ActivatedRoute) {this.test() }
   errorStatus:boolean = false;
   errorMsj:any = "";
 
@@ -44,7 +50,6 @@ export class LoginComponent implements OnInit {
         this.errorMsj = dataResponse.message;
       }
     })
-    console.log(form)
   }
 
   getIdToken(){
