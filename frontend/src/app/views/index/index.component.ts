@@ -752,15 +752,35 @@ export class IndexComponent implements OnInit {
     
   }
 
-  saveProduct(id: string){
-    this.api.getProductById(id).subscribe((data:any)=>{
-      console.log(data);
-      
-      let si = localStorage.setItem("producto", JSON.stringify(data));
-      //localStorage.setItem('id',data)
-    });
 
-    //localStorage.setItem('id',data(this.dataProducts))
+  existeProductCarrito(data: any, id: string) {
+    for (let index = 0; index < data.length; index++) {
+      console.log(data[index]);
+      if (data[index].data._id === id) {
+          return {index: index, cantidad: data[index].cantidad}
+      }
+    }
+    return {index: -1, cantidad: 0};
+  }
+
+  saveProduct(id: string){
+    const carrito = localStorage.getItem("producto");
+
+    this.api.getProductById(id).subscribe((data:any)=>{
+      if(carrito){
+        let cesta = JSON.parse(carrito);
+        const existe = this.existeProductCarrito(cesta,id);
+        if(existe.cantidad){
+          cesta[existe.index].cantidad = existe.cantidad +1;
+          localStorage.setItem("producto", JSON.stringify(cesta));
+        }else{
+          cesta.push({data: data, cantidad: 1});
+          localStorage.setItem("producto", JSON.stringify(cesta));
+        }
+      }else{
+        localStorage.setItem("producto", JSON.stringify([{data: data, cantidad: 1}]));
+      }
+    });
   }
 
 
