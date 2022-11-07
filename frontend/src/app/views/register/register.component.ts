@@ -8,6 +8,9 @@ import { Router } from '@angular/router';
 
 
 
+
+
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -33,6 +36,8 @@ export class RegisterComponent implements OnInit {
   },
 );
  
+
+
   ngOnInit(): void {
     if(this.estaLogueado()){
       this.router.navigate(['index']);

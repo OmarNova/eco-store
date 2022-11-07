@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ApiService } from '../../services/api/api.service'
-import { ProductsI } from '../../models/product.interfaces';
+import { ProductsI, dataProducts } from '../../models/product.interfaces';
 import { Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Modal } from 'bootstrap';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -757,8 +758,10 @@ export class IndexComponent implements OnInit {
 
     modal.appendChild(colImg);
     modal.appendChild(colProduct);
-  
-
+    
   }
 
+  saveProduct(data: any){
+    localStorage.setItem('id',data(this.dataProducts))
+  }
 }
