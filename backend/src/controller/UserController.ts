@@ -88,18 +88,6 @@ class UserController {
       
     }
 
-    public getUser =  (email: string, fn: Function) => {
-        this.model.getUser(email, (error: any, rows: any) => {
-            if (error) {console.error(error);return { error: true, message: 'error database' };}   
-
-            if (rows.length != 0) {
-                return rows[0];
-            } else {
-                return { error: true, message: 'User not Found' };
-            }
-        });
-    }
-
     public registerUser = (req: Request, res: Response) => {
      
         if(JSON.stringify(req.body) != "{}") {
@@ -123,19 +111,6 @@ class UserController {
             return res.status(404).json({ error: true, message: 'Data not found' });
         }
     }
-
-    public logoutUser = (req: Request, res: Response) => {
-
-        if(req.session.email){
-            req.session.destroy((err) => {
-                if(err) throw err;
-                return res.json({ error: false, message: 'Logout' });
-            });
-        }else{
-            return res.json({ error: true, message: 'Sessions Not Exists' });
-        }
-    }
-
 
     public loginUser = (req: Request, res: Response) => {
      
@@ -162,6 +137,26 @@ class UserController {
         } else {
             return res.status(404).json({ error: true, message: 'Data not found' });
         }
+    }
+
+    public buy = (req: Request, res: Response) => {
+        const email = req.params.email;
+        const carrito = req.body.carrito;
+        this.model.getUser(email, (error: any, rows: any) => {
+            if (error) {console.error(error);return { error: true, message: 'error database' };}   
+
+            if (rows.length != 0) {
+                const idUser = rows[0].id;
+                this.model.postPedido(idUser,req.body.total,(error:any, rows:any)=> {
+                    for (let index = 0; index < carrito.length; index++) {
+                        this.model.postCompra(idUser,carrito[index].cantidad,carrito[index].data._id,rows[rows.length-1].id);
+                    }
+                });
+                
+            } else {
+                return res.status(404).json({ error: true, message: 'User not Found' });
+            }
+        });
     }
 
 }

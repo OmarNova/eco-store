@@ -45,9 +45,9 @@
                             </svg></div>
                     </div>
                     <div class="row">
-                        <div class="col-4" style="text-align: center;padding-left: 0px;padding-right: 0px;width: 110.4844px;"><a routerLink="/favoritos" style="color: var(--bs-navbar-active-color);font-size: 16px;">Mis Favoritos</a></div>
+                        <div class="col-4" style="text-align: center;padding-left: 0px;padding-right: 0px;width: 110.4844px;"><a routerLink="/favoritos" style="text-decoration: none;color: var(--bs-navbar-active-color);font-size: 16px;text-decoration: none;">Mis Favoritos</a></div>
                         <div class="col" style="text-align: center;width: 110.4844px;">
-                            <div class="dropdown"><a class="dropdown" aria-expanded="false" data-bs-toggle="dropdown" id="cuentaDropdown" href="#" style="color: var(--bs-navbar-active-color);text-align: center;font-size: 16px;">Mi cuenta</a>
+                            <div class="dropdown"><a class="dropdown" aria-expanded="false" data-bs-toggle="dropdown" id="cuentaDropdown" href="#" style="text-decoration: none;text-decoration: none;color: var(--bs-navbar-active-color);text-align: center;font-size: 16px;">Mi cuenta</a>
                                 <div class="dropdown-menu"><a class="dropdown-item cuentaDrop" style="border-bottom: 1px solid var(--bs-gray-500) ;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-person-fill">
                                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
                                         </svg>Mi Cuenta</a><a class="dropdown-item cuentaDrop" routerLink="/favoritos" style="border-bottom: 1px solid var(--bs-gray-500) ;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-heart">
@@ -67,7 +67,7 @@
                                         </svg>Crear una Cuenta</a></div>
                             </div>
                         </div>
-                        <div class="col" style="text-align: center;padding-left: 2px;padding-right: 1px;width: 110.4844px;"><a id="btn-carrito" href="#" style="color: var(--bs-navbar-active-color);font-size: 16px;">Mi carrito</a></div>
+                        <div class="col" style="text-align: center;padding-left: 2px;padding-right: 1px;width: 110.4844px;"><a id="btn-carrito" data-bs-target="#modal-carrito" data-bs-toggle="modal"style="color: var(--bs-navbar-active-color);font-size: 16px;">Mi carrito</a></div>
                     </div>
                 </div>
             </div>
@@ -111,8 +111,8 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col"><button class="btn btn-primary boton" type="submit">Login</button></div>
-                                <div class="col"><button class="btn btn-primary boton-facebook" type="button">Acceder con Facebook</button></div>
+                                <div class="col"><button class="boton" type="submit">Login</button></div>
+                                <div class="col"><button class="boton-facebook" type="button">Acceder con Facebook</button></div>
                             </div>
 
                             <div class="alert alert-danger" *ngIf="errorStatus">

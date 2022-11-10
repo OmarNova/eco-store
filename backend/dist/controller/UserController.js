@@ -100,20 +100,6 @@ class UserController {
                 }
             });
         };
-        this.getUser = (email, fn) => {
-            this.model.getUser(email, (error, rows) => {
-                if (error) {
-                    console.error(error);
-                    return { error: true, message: 'error database' };
-                }
-                if (rows.length != 0) {
-                    return rows[0];
-                }
-                else {
-                    return { error: true, message: 'User not Found' };
-                }
-            });
-        };
         this.registerUser = (req, res) => {
             if (JSON.stringify(req.body) != "{}") {
                 this.model.getUser(req.body.email, (error, rows) => {
@@ -139,18 +125,6 @@ class UserController {
             }
             else {
                 return res.status(404).json({ error: true, message: 'Data not found' });
-            }
-        };
-        this.logoutUser = (req, res) => {
-            if (req.session.email) {
-                req.session.destroy((err) => {
-                    if (err)
-                        throw err;
-                    return res.json({ error: false, message: 'Logout' });
-                });
-            }
-            else {
-                return res.json({ error: true, message: 'Sessions Not Exists' });
             }
         };
         this.loginUser = (req, res) => {
@@ -183,6 +157,27 @@ class UserController {
             else {
                 return res.status(404).json({ error: true, message: 'Data not found' });
             }
+        };
+        this.buy = (req, res) => {
+            const email = req.params.email;
+            const carrito = req.body.carrito;
+            this.model.getUser(email, (error, rows) => {
+                if (error) {
+                    console.error(error);
+                    return { error: true, message: 'error database' };
+                }
+                if (rows.length != 0) {
+                    const idUser = rows[0].id;
+                    this.model.postPedido(idUser, req.body.total, (error, rows) => {
+                        for (let index = 0; index < carrito.length; index++) {
+                            this.model.postCompra(idUser, carrito[index].cantidad, carrito[index].data._id, rows[rows.length - 1].id);
+                        }
+                    });
+                }
+                else {
+                    return res.status(404).json({ error: true, message: 'User not Found' });
+                }
+            });
         };
         this.model = new UserModel_1.default();
     }

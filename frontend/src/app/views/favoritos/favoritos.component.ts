@@ -113,42 +113,36 @@ export class FavoritosComponent implements OnInit {
     row.setAttribute("style","display: none;")
 
     let col =  document.createElement("div");
-    col.classList.add("col");
+    col.classList.add("col", "d-flex", "justify-content-center");
     col.setAttribute("style","text-align: center;");
-    col.classList.add("d-flex");
-    col.classList.add("justify-content-center");
-
 
     let boton = document.createElement("button");
-    boton.classList.add("btn");
-    boton.classList.add("boton");
-    boton.classList.add("d-flex");
-    boton.classList.add("justify-content-center");
+    boton.classList.add("boton", "d-flex", "justify-content-center", "align-items-center");
     boton.setAttribute("type","button");
 
+    boton.addEventListener("click",event=>{
+      event.preventDefault();
+      this.saveProduct(id);
+    })
+
     let icon = document.createElement("svg");
-    icon.classList.add("bi");
-    icon.classList.add("bi-bag-plus");
-    icon.classList.add("btnhover");
+    icon.classList.add("bi", "bi-bag-plus", "btnhover");
     icon.setAttribute("style","font-size: 15px;");
     icon.setAttribute("width","1em");
     icon.setAttribute("height","1em");
     icon.setAttribute("fill","currentColor");
     icon.setAttribute("viewBox","0 0 16 16");
 
-    let p = document.createElement("p");
-    p.innerHTML = "Añadir a la cesta"
 
-    //boton.innerHTML = "Añadir a la cesta";
+    icon.innerHTML = "Añadir a la cesta";
     boton.appendChild(icon);
-    boton.appendChild(p);
-
+    
     col.appendChild(boton);
     row.appendChild(col);
 
     return row;
   }
-
+  
   fillPrecioContenido (contenido: string, precio: string, moneda: string): HTMLDivElement {
     let row =  document.createElement("div");
     let colContenido =  document.createElement("div");
@@ -439,7 +433,7 @@ export class FavoritosComponent implements OnInit {
   }
 
   onLogout(){
-    localStorage.clear()
+    localStorage.removeItem("token");
     this.router.navigate(['index'])
   }
 
@@ -534,6 +528,36 @@ borrarHTML(){
     while (vitrina.firstChild) {
       vitrina.removeChild(vitrina.firstChild);
     }
+  }
+
+  existeProductCarrito(data: any, id: string) {
+    for (let index = 0; index < data.length; index++) {
+      console.log(data[index]);
+      if (data[index].data._id === id) {
+          return {index: index, cantidad: data[index].cantidad}
+      }
+    }
+    return {index: -1, cantidad: 0};
+  }
+
+  saveProduct(id: string){
+    const carrito = localStorage.getItem("producto");
+
+    this.api.getProductById(id).subscribe((data:any)=>{
+      if(carrito){
+        let cesta = JSON.parse(carrito);
+        const existe = this.existeProductCarrito(cesta,id);
+        if(existe.cantidad){
+          cesta[existe.index].cantidad = existe.cantidad +1;
+          localStorage.setItem("producto", JSON.stringify(cesta));
+        }else{
+          cesta.push({data: data, cantidad: 1});
+          localStorage.setItem("producto", JSON.stringify(cesta));
+        }
+      }else{
+        localStorage.setItem("producto", JSON.stringify([{data: data, cantidad: 1}]));
+      }
+    });
   }
 
 

@@ -47,12 +47,12 @@
                   <div class="row">
                       <div class="col-4" style="text-align: center;padding-left: 0px;padding-right: 0px;width: 110.4844px;"><a routerLink="/favoritos" style="color: var(--bs-navbar-active-color);font-size: 16px;">Mis Favoritos</a></div>
                       <div class="col" style="text-align: center;width: 110.4844px;">
-                          <div class="dropdown"><a class="dropdown" aria-expanded="false" data-bs-toggle="dropdown" id="cuentaDropdown" href="#" style="color: var(--bs-navbar-active-color);text-align: center;font-size: 16px;">Mi cuenta</a>
+                          <div class="dropdown"><a class="dropdown" aria-expanded="false" data-bs-toggle="dropdown" id="cuentaDropdown" style="color: var(--bs-navbar-active-color);text-align: center;font-size: 16px;">Mi cuenta</a>
                               <div class="dropdown-menu"><a class="dropdown-item cuentaDrop" style="border-bottom: 1px solid var(--bs-gray-500) ;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-person-fill">
                                           <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
                                       </svg>Mi Cuenta</a><a class="dropdown-item cuentaDrop" routerLink="/favoritos" style="border-bottom: 1px solid var(--bs-gray-500) ;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-heart">
                                           <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
-                                      </svg>Mis Favoritos</a><a class="dropdown-item cuentaDrop" href="#" style="border-bottom: 1px solid var(--bs-gray-500) ;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-check2">
+                                      </svg>Mis Favoritos</a><a routerLink="/cart" class="dropdown-item cuentaDrop" style="border-bottom: 1px solid var(--bs-gray-500) ;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-check2">
                                           <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
                                       </svg>Mi carrito</a>
                                       <a class="dropdown-item cuentaDrop" *ngIf="!estaLogueado()" routerLink="/login" style="border-bottom: 1px solid var(--bs-gray-500) ;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-lock-fill">
@@ -61,13 +61,13 @@
 
                                       <a class="dropdown-item cuentaDrop" (click)="onLogout()" *ngIf="estaLogueado()" routerLink="/login" style="border-bottom: 1px solid var(--bs-gray-500) ;"><i class="bi bi-box-arrow-right"></i>Logout</a>
 
-                                      <a class="dropdown-item cuentaDrop btnhover" *ngIf="!estaLogueado()" routerLink="/register" style="border-bottom: 1px none var(--bs-gray-500) ;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-person-plus-fill">
+                                      <a class="dropdown-item cuentaDrop btnhover" *ngIf="!estaLogueado()" routerLink="/register" style="border-bottom: 1px none var(--bs-gray-500) ;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-person-plus-fill" >
                                           <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
                                           <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"></path>
                                       </svg>Crear una Cuenta</a></div>
                           </div>
                       </div>
-                      <div class="col" style="text-align: center;padding-left: 2px;padding-right: 1px;width: 110.4844px;"><a id="btn-carrito" href="#" style="color: var(--bs-navbar-active-color);font-size: 16px;">Mi carrito</a></div>
+                      <div class="col" style="text-align: center;padding-left: 2px;padding-right: 1px;width: 110.4844px;"><a id="btn-carrito" data-bs-target="#modal-carrito" data-bs-toggle="modal"style="color: var(--bs-navbar-active-color);font-size: 16px;">Mi carrito</a></div>
                   </div>
               </div>
           </div>
@@ -93,7 +93,7 @@
               <div class="col" style="text-align: center;width: 100%;height: auto;"><input disabled value="0" type="number" style="width: 100%;height: 200%;text-align: center;font-weight: bold;" min="0"></div>
               <div class="col" style="width: 100%;height: auto;"><input id="textPrice" disabled type="number" style="width: 100%;height: 200%;text-align: center;font-weight: bold;" value="100" max="100"></div>
           </div>
-          <div class="row" style="margin-right: 0px;margin-left: 0px;margin-top: 38px;"><button (click)="filtrarPrecio()" class="btn boton" type="button">Filtrar</button></div>
+          <div class="row" style="margin-right: 0px;margin-left: 0px;margin-top: 38px;"><button (click)="filtrarPrecio()" class="boton" type="button">Filtrar</button></div>
       </div>
       <div class="col-9" id="vitrina" style="padding-left: 70px;">
     
@@ -156,66 +156,6 @@
                               </div>
                           </div>
                       </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-  <div class="modal fade" role="dialog" tabindex="-1" id="modal-carrito">
-      <div class="modal-dialog" role="document">
-          <div class="modal-content">
-              <div class="modal-header" style="border-style: none;border-color: var(--bs-purple);border-bottom-style: solid;border-bottom-color: var(--bs-gray-500);">
-                  <h4 id="modal-tittle-carrito" style="color: #009929;">MI CARRITO (3)</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body" id="modal-body-carrito">
-                  <div class="row" style="border-style: none;border-color: var(--bs-purple);border-bottom: 1px solid var(--bs-gray-500) ;">
-                      <div class="col-xxl-3"><img width="100" height="80" style="width: 100%;height: 90%;"></div>
-                      <div class="col">
-                          <div class="row">
-                              <div class="col-xxl-9">
-                                  <h6><br><strong>Aceite corporal de almendras dulces</strong><br><br></h6>
-                              </div>
-                              <div class="col" style="text-align: right;"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-x" style="font-size: 39px;color: var(--bs-secondary);">
-                                          <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
-                                      </svg></a></div>
-                          </div>
-                          <div class="row">
-                              <div class="col">
-                                  <p style="color: var(--bs-gray-700);font-weight: bold;">500ML</p>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col">
-                                  <p style="color: var(--bs-gray-700);font-weight: bold;">Cantidad:</p>
-                              </div>
-                              <div class="col"><input type="number" style="width: 100%;"></div>
-                              <div class="col">
-                                  <p style="color: var(--bs-gray-700);font-weight: bold;">10,45 E</p>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="row" style="border-style: none;border-color: var(--bs-purple);border-bottom: 1px solid var(--bs-gray-500);padding-top: 10px;">
-                      <div class="col-xxl-9">
-                          <p style="color: var(--bs-gray-700);font-weight: bold;">Subtotal</p>
-                      </div>
-                      <div class="col">
-                          <p style="color: var(--bs-gray-700);font-weight: bold;">38,40 E</p>
-                      </div>
-                  </div>
-                  <div class="row" style="border-style: none;border-color: var(--bs-purple);border-bottom: 1px solid var(--bs-gray-500);padding-top: 10px;">
-                      <div class="col-xxl-9">
-                          <p style="color: #009929;font-weight: bold;">TOTAL (IVA incluido)</p>
-                      </div>
-                      <div class="col">
-                          <p style="color: #009929;font-weight: bold;">38,40 E</p>
-                      </div>
-                  </div>
-                  <div class="row" style="margin-bottom: 20px;margin-top: 20px;">
-                      <div class="col"><button class="btn btn-primary boton" type="button">Ir al carrito</button></div>
-                  </div>
-                  <div class="row">
-                      <div class="col"><button class="btn btn-primary boton" type="button">Realizar pedido</button></div>
                   </div>
               </div>
           </div>

@@ -1,3 +1,27 @@
+
+body{
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+ 
+
+::-webkit-scrollbar-thumb {
+  background: #009929; 
+   border-radius: 10px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: #efa229; 
+}
+
 .product-item {
   padding: 10px;
 }
@@ -9,6 +33,7 @@
 .btnhover:hover{
   cursor: pointer;
 }
+
 
 .product-item .product-container {
   text-align: left;
@@ -97,24 +122,27 @@
 }
 
 .boton {
-  border-color: #009929;
+  font-weight: bold;
+  align-items: center;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 100%;
+  border: 1px solid #009929;
   background-color: #009929;
   border-radius: 40px;
   color: white;
 }
 
-.boton:focus{
-  border-color: #009929;
-  background-color: #009929;
-  border-radius: 40px;
-  color: white;
-}
+
 
 .boton:hover {
   border-color: #efa229;
   background: #efa229;
   color: black;
 }
+
+
 
 
 
@@ -145,6 +173,10 @@ input[type="range"] {
 
 a {
   text-decoration: none;
+}
+
+a:hover{
+  cursor: pointer;
 }
 
 #searchInput {

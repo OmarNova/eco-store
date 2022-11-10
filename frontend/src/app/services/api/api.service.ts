@@ -77,6 +77,11 @@ export class ApiService {
     return this.http.post<any>(dir,product,httpOptions);
   }
 
+  postCompra(productos: any, httpOptions: any):Observable<any>{
+    let dir = this.url + 'user/buy/';
+    return this.http.post<any>(dir,productos,httpOptions);
+  }
+
   deleteFavorito(product: string, httpOptions: any):Observable<any>{
     let dir = this.url + `user/favorites/${product}`;
     return this.http.delete<any>(dir,httpOptions);

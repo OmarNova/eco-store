@@ -20,9 +20,11 @@ class UserRoute {
         this.router.post('/user/favorites/', auth, this.UserController.postFavorites);
         this.router.delete('/user/favorites/:idProduct', auth, this.UserController.deleteFavorites);
         
-        this.router.get('/user/logout', this.UserController.logoutUser);
-        this.router.post('/user/register', this.UserController.registerUser);
-        this.router.post('/user/login', this.UserController.loginUser);
+        this.router.post('/user/register/', this.UserController.registerUser);
+        this.router.post('/user/login/', this.UserController.loginUser);
+
+        this.router.post('/user/buy/',auth, this.UserController.buy);
+
 
     }
 

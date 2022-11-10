@@ -40,6 +40,7 @@ export class IndexComponent implements OnInit {
       this.setNumeropaginas(data.length);
     });
 
+  
   }
 
 
@@ -72,15 +73,13 @@ export class IndexComponent implements OnInit {
     if(vitrina){
       let i = 0;
       let row = document.createElement("div");
-      row.classList.add("row");
-      row.classList.add("product-list");
+      row.classList.add("row", "product-list");
       data.forEach((item: any)=>{
         if(i>3){
           i=0;
           vitrina.appendChild(row);
           row = document.createElement("div");
-          row.classList.add("row"); 
-          row.classList.add("product-list");
+          row.classList.add("row", "product-list");
         }
         row.appendChild(this.fillCardProduct(item));
         i++;
@@ -93,9 +92,7 @@ export class IndexComponent implements OnInit {
 
   fillCardProduct (product: any): HTMLDivElement{
     let col = document.createElement("div");
-    col.classList.add("col-sm-6");
-    col.classList.add("col-md-4");
-    col.classList.add("product-item");
+    col.classList.add("col-sm-6", "col-md-4", "product-item");
     col.setAttribute("style","width: 280px;");
     col.setAttribute("id",`${product._id}`);
     col.addEventListener("mouseover",event=>{
@@ -130,17 +127,11 @@ export class IndexComponent implements OnInit {
     row.setAttribute("style","display: none;")
 
     let col =  document.createElement("div");
-    col.classList.add("col");
+    col.classList.add("col", "d-flex", "justify-content-center");
     col.setAttribute("style","text-align: center;");
-    col.classList.add("d-flex");
-    col.classList.add("justify-content-center");
-
 
     let boton = document.createElement("button");
-    boton.classList.add("btn");
-    boton.classList.add("boton");
-    boton.classList.add("d-flex");
-    boton.classList.add("justify-content-center");
+    boton.classList.add("boton", "d-flex", "justify-content-center", "align-items-center");
     boton.setAttribute("type","button");
 
     boton.addEventListener("click",event=>{
@@ -149,21 +140,17 @@ export class IndexComponent implements OnInit {
     })
 
     let icon = document.createElement("svg");
-    icon.classList.add("bi");
-    icon.classList.add("bi-bag-plus");
-    icon.classList.add("btnhover");
+    icon.classList.add("bi", "bi-bag-plus", "btnhover");
     icon.setAttribute("style","font-size: 15px;");
     icon.setAttribute("width","1em");
     icon.setAttribute("height","1em");
     icon.setAttribute("fill","currentColor");
     icon.setAttribute("viewBox","0 0 16 16");
 
-    let p = document.createElement("p");
-    p.innerHTML = "Añadir a la cesta"
 
+    icon.innerHTML = "Añadir a la cesta";
     boton.appendChild(icon);
-    boton.appendChild(p);
-
+    
     col.appendChild(boton);
     row.appendChild(col);
 
@@ -174,8 +161,7 @@ export class IndexComponent implements OnInit {
     let row =  document.createElement("div");
     let colContenido =  document.createElement("div");
     let contenidoh6 = document.createElement("h6");
-    contenidoh6.classList.add("text-muted");
-    contenidoh6.classList.add("mb-2");
+    contenidoh6.classList.add("text-muted", "mb-2");
     contenidoh6.setAttribute("style","text-align: center;font-size: 20px;");
     contenidoh6.innerHTML = contenido;
 
@@ -209,8 +195,7 @@ export class IndexComponent implements OnInit {
     let row =  document.createElement("div");
     row.classList.add("row");
     let col =  document.createElement("div");
-    col.classList.add("col-8");
-    col.classList.add("col-xxl-12");
+    col.classList.add("col-8", "col-xxl-12");
     col.setAttribute("style","height: 130px");
 
     let h5 = document.createElement("h5")
@@ -289,9 +274,7 @@ export class IndexComponent implements OnInit {
     }
 
     let icon = document.createElement("svg");
-    icon.classList.add("bi");
-    icon.classList.add("bi-heart-fill");
-    icon.classList.add("btnhover");
+    icon.classList.add("bi", "bi-heart-fill", "btnhover");
     icon.setAttribute("style","font-size: 20px;");
     icon.setAttribute("width","1em");
     icon.setAttribute("height","1em");
@@ -308,13 +291,11 @@ export class IndexComponent implements OnInit {
       if(pagina){
 
         let flechaInicio = document.createElement("li");
-        flechaInicio.classList.add("page-item");
-        flechaInicio.classList.add("btnhover");
+        flechaInicio.classList.add("page-item", "btnhover");
         flechaInicio.setAttribute("style","color: #009929;");
   
         let linkInicio = document.createElement("a");
-        linkInicio.classList.add("page-link");
-        linkInicio.classList.add("btnhover");
+        linkInicio.classList.add("page-link", "btnhover");
         linkInicio.innerHTML = "«";
         linkInicio.addEventListener("click",event=>{
           event.preventDefault();
@@ -366,7 +347,7 @@ export class IndexComponent implements OnInit {
 
 
   onLogout(){
-    localStorage.clear()
+    localStorage.removeItem("token");
     this.router.navigate(['/index'])
     window.location.reload();
   }
@@ -616,8 +597,7 @@ export class IndexComponent implements OnInit {
    
     const title = document.createElement("h5");
     title.setAttribute("style"," font-family: Roboto, sans-serif;");
-    title.classList.add("modal-title");
-    title.classList.add("fw-bold");
+    title.classList.add("modal-title", "fw-bold");
     title.innerHTML = data.nombre;
 
     colTitle.appendChild(title);
@@ -627,9 +607,7 @@ export class IndexComponent implements OnInit {
     colIcon.setAttribute("style","text-align: center;");
 
     const icon = document.createElement("svg");
-    icon.classList.add("bi");
-    icon.classList.add("bi-heart-fill");
-    icon.classList.add("btnhover");
+    icon.classList.add("bi", "bi-heart-fill", "btnhover");
     icon.setAttribute("id",`fav-modal-${id}`);
     const color = document.getElementById(`fav-${id}`)?.style.color;
     if(color=="red"){
@@ -714,6 +692,7 @@ export class IndexComponent implements OnInit {
 
     const inputNumber = document.createElement("input");
     inputNumber.setAttribute("type","number");
+    inputNumber.setAttribute("min","0");
     inputNumber.setAttribute("style","text-align: center;width: 40%;height: 100%;color: #009929;");
 
     colInputNumber.appendChild(inputNumber);
@@ -723,14 +702,17 @@ export class IndexComponent implements OnInit {
     colBoton.setAttribute("style","text-align: center;")
 
     const boton = document.createElement("buttton");
-    boton.classList.add("btn");
     boton.classList.add("boton");
     boton.setAttribute("type","button");
     boton.setAttribute("style","width: 70%;background: #009929");
 
+    boton.addEventListener("click",event=>{
+      event.preventDefault();
+      this.saveProduct(id);
+    })
+
     const iconCesta = document.createElement("i");
-    iconCesta.classList.add("bi");
-    iconCesta.classList.add("bi-bag-plus");
+    iconCesta.classList.add("bi", "bi-bag-plus");
 
     boton.innerHTML = "Añadir a la cesta";
 
@@ -753,9 +735,164 @@ export class IndexComponent implements OnInit {
   }
 
 
+  totalProductos(): {total: number, subtotal: number} {
+    const data = localStorage.getItem("producto");
+    if(data){
+      const cesta = JSON.parse(data as string);
+      let subtotal = 0;
+      let total = 0;
+      for (let index = 0; index < cesta.length; index++) {
+        subtotal += cesta[index].data.precio;
+        total += cesta[index].data.precio * cesta[index].cantidad;
+      }
+      return {total, subtotal};
+    }
+    return {total: 0, subtotal:0};
+
+  }
+
+  fillModalCarrito(product: any){
+    const data = localStorage.getItem("producto");
+    const modal_carrito = document.getElementById("carrito-product") as HTMLElement;
+
+    if(data){
+      const producto = document.getElementById(`cesta-product-${product.data._id}`);
+      if(producto){
+        let cantidad_prod = document.getElementById(`cantidad-product-${product.data._id}`) as HTMLInputElement;
+        cantidad_prod.value = `${product.cantidad}`;
+      }else{
+        const carrito = JSON.parse(data);
+      const title = document.getElementById("modal-tittle-carrito") as HTMLElement;
+      title.innerHTML = `MI CARRITO(${carrito.length})`;
+
+      const rowProduct = document.createElement("div")
+      rowProduct.classList.add("row");
+      rowProduct.setAttribute("style","border-style: none;border-color: var(--bs-purple);border-bottom: 1px solid var(--bs-gray-500) ;");
+
+      const colImg = document.createElement("div");
+      colImg.classList.add("col-xxl-3");
+
+      const imgProduct = document.createElement("img");
+      imgProduct.setAttribute("style","width: 100%;height: 90%;");
+      imgProduct.setAttribute("width","100");
+      imgProduct.setAttribute("height","80");
+      imgProduct.setAttribute("src",`${product.data.img}`);
+
+      colImg.appendChild(imgProduct);
+
+      const colProduct = document.createElement("div");
+      colProduct.classList.add("col");
+
+      const rowProductHeader = document.createElement("div");
+      rowProductHeader.classList.add("row");
+
+      const colTile = document.createElement("div");
+      colTile.classList.add("col-xxl-9");
+
+      const tituloProduct = document.createElement("h6");
+      const strong = document.createElement("strong");
+      strong.innerHTML = product.data.nombre;
+      tituloProduct.appendChild(strong);
+
+      colTile.appendChild(tituloProduct);
+
+      const colIconEliminar = document.createElement("div");
+      colIconEliminar.classList.add("col");
+      colIconEliminar.setAttribute("style","text-align: right;")
+        
+      const linkEliminar = document.createElement("a");
+      linkEliminar.addEventListener("click",e=>{
+        e.preventDefault();
+        this.deleteProduct(product.data._id);
+      });
+
+      const icono = document.createElement("svg");
+
+      icono.classList.add("bi", "bi-x");
+      icono.setAttribute("style","font-size: 39px;color: var(--bs-secondary);");
+      icono.setAttribute("width","1em");
+      icono.setAttribute("height","1em");
+      icono.setAttribute("fill","currentColor");
+      icono.setAttribute("viewBox","0 0 16 16");
+
+      linkEliminar.appendChild(icono);
+      colIconEliminar.appendChild(linkEliminar);
+
+      rowProductHeader.appendChild(colTile);
+      rowProductHeader.appendChild(colIconEliminar);
+
+      const rowContenido = document.createElement("div");
+      rowContenido.classList.add("row");
+
+      const colContenido = document.createElement("div");
+      colContenido.classList.add("col");
+
+      const contenido = document.createElement("p");
+      contenido.setAttribute("style","color: var(--bs-gray-700);font-weight: bold;");
+      contenido.innerHTML = `${product.data.contenido}`;
+
+      colContenido.appendChild(contenido);
+      rowContenido.appendChild(colContenido);
+
+      const rowFooter = document.createElement("div");
+      rowFooter.classList.add("row");
+
+      const colCantidad = document.createElement("div");
+      colCantidad.classList.add("col");
+
+      const textCantidad = document.createElement("p");
+      textCantidad.setAttribute("style","color: var(--bs-gray-700);font-weight: bold;");
+      textCantidad.innerHTML = "Cantidad:";
+
+      colCantidad.appendChild(textCantidad);
+
+      const colInputCantidad = document.createElement("div");
+      colInputCantidad.classList.add("col");
+
+      const inputCantidad = document.createElement("input");
+      inputCantidad.classList.add("col");
+      inputCantidad.setAttribute("style","width: 100%;");
+      inputCantidad.setAttribute("type","number");
+      inputCantidad.setAttribute("min","0");
+      inputCantidad.setAttribute("value",`${product.cantidad}`);
+      inputCantidad.setAttribute("id",`cantidad-product-${product.data._id}`);
+
+      colInputCantidad.appendChild(inputCantidad);
+
+      const colPrecio = document.createElement("div");
+      colPrecio.classList.add("col");
+
+      const precio = document.createElement("p");
+      precio.setAttribute("style","color: var(--bs-gray-700);font-weight: bold;");
+      precio.innerHTML = product.data.precio + " " + product.data.moneda;
+
+      colPrecio.appendChild(precio);
+
+      rowFooter.appendChild(colCantidad);
+      rowFooter.appendChild(colInputCantidad);
+      rowFooter.appendChild(colPrecio);
+
+      colProduct.appendChild(rowProductHeader);
+      colProduct.appendChild(rowContenido);
+      colProduct.appendChild(rowFooter);
+
+      rowProduct.appendChild(colImg);
+      rowProduct.appendChild(colProduct);
+
+      rowProduct.setAttribute("id",`cesta-product-${product.data._id}`);
+
+      modal_carrito.appendChild(rowProduct);
+      }
+      const total = document.getElementsByClassName("totales");
+      total[0].textContent = this.totalProductos().subtotal + " " + "€";
+      total[1].textContent = this.totalProductos().total+ " " + "€";
+      //€
+      
+    }
+  }
+
   existeProductCarrito(data: any, id: string) {
     for (let index = 0; index < data.length; index++) {
-      console.log(data[index]);
       if (data[index].data._id === id) {
           return {index: index, cantidad: data[index].cantidad}
       }
@@ -763,9 +900,30 @@ export class IndexComponent implements OnInit {
     return {index: -1, cantidad: 0};
   }
 
+  deleteProduct(id: string){
+    const carrito = document.getElementById("carrito-product") as HTMLElement;
+    const producto = document.getElementById(`cesta-product-${id}`) as HTMLElement;
+    carrito.removeChild(producto);
+
+    const data_carrito = JSON.parse(localStorage.getItem("producto") as string);
+    for (let index = 0; index < data_carrito.length; index++) {
+      if(data_carrito[index].data._id == id){
+        data_carrito.splice(index,1);
+        break;
+      }
+    }
+    localStorage.setItem("producto",JSON.stringify(data_carrito));
+    const total = document.getElementsByClassName("totales");
+    total[0].textContent = this.totalProductos().subtotal + "€";
+    total[1].textContent = this.totalProductos().total + "€";
+    const titulo = document.getElementById("modal-tittle-carrito") as HTMLElement;
+    titulo.textContent = `MI CARRITO (${JSON.parse(localStorage.getItem("producto") as string).length})`;
+
+  }
+
   saveProduct(id: string){
     const carrito = localStorage.getItem("producto");
-
+    
     this.api.getProductById(id).subscribe((data:any)=>{
       if(carrito){
         let cesta = JSON.parse(carrito);
@@ -780,6 +938,11 @@ export class IndexComponent implements OnInit {
       }else{
         localStorage.setItem("producto", JSON.stringify([{data: data, cantidad: 1}]));
       }
+
+      const compra = JSON.parse(localStorage.getItem("producto") as string);
+      const index = this.existeProductCarrito(compra,id);
+      this.fillModalCarrito(compra[index.index]);
+
     });
   }
 

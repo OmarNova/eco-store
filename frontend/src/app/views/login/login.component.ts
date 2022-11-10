@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api/api.service';
 import { LoginI } from '../../models/login.interface';
@@ -8,7 +8,8 @@ import { ResponseI } from '../../models/response.interface'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit {
 
@@ -17,14 +18,8 @@ export class LoginComponent implements OnInit {
     passwd : new FormControl('',Validators.required)
   })
 
-  test() {
-    this.route.queryParams.subscribe((params:any) => {
-      console.log(params['page']); // { order: "popular" }
 
-});
-  }
-
-  constructor(private api:ApiService, private router:Router, private route: ActivatedRoute) {this.test() }
+  constructor(private api:ApiService, private router:Router, private route: ActivatedRoute) {}
   errorStatus:boolean = false;
   errorMsj:any = "";
 
@@ -64,8 +59,9 @@ export class LoginComponent implements OnInit {
 
 
   onLogout(){
-    localStorage.clear()
-    this.router.navigate(['index'])
+    localStorage.removeItem("token");
+    this.router.navigate(['/index'])
+    window.location.reload();
   }
 
   estaLogueado(){

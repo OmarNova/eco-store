@@ -41,6 +41,21 @@ export default class MoviesModel {
         }); 
     }
 
+    public postPedido = (idUser: number, total: number ,fn: Function) => {
+        this.mysqlDBC.connection();
+        this.mysqlDBC.pool.query(`INSERT INTO pedidos(users_id,total) VALUES (${idUser},${total});`);
+        const statement = `SELECT pedidos.id FROM pedidos,users WHERE users.id=${idUser} AND users.id = pedidos.users_id`;
+        this.mysqlDBC.pool.query(statement, (error: any, rows: any) => {
+            fn(error, rows);
+        }); 
+    }
+
+    public postCompra = (idUser: number, cantidad: number, idProduct: string, idPedidos: number) => {
+        this.mysqlDBC.connection();
+        const statement = `INSERT INTO pedidos_has_productos(pedidos_id,pedidos_users_id,productos_idproductos,cantidad) VALUES (${idPedidos},${idUser},'${idProduct}',${cantidad});`;
+        this.mysqlDBC.pool.query(statement); 
+    }
+
     public deleteFavorites = (idUser: number, idProduct: string ,fn: Function) => {
         this.mysqlDBC.connection();
         const statement = `DELETE FROM productos_has_users WHERE users_id=${idUser} AND productos_idproductos='${idProduct}'`;

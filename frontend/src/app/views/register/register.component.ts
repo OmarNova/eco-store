@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { debounce, debounceTime } from 'rxjs';
 import { registerI } from '../../models/register.interface';
@@ -6,15 +6,11 @@ import { ApiService } from '../../services/api/api.service';
 import { ResponseI } from '../../models/response.interface';
 import { Router } from '@angular/router';
 
-
-
-
-
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css', './checkpassword.component.css']
+  styleUrls: ['./register.component.css', './checkpassword.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class RegisterComponent implements OnInit {
 
@@ -45,8 +41,9 @@ export class RegisterComponent implements OnInit {
   }
 
   onLogout(){
-    localStorage.clear()
-    this.router.navigate(['index'])
+    localStorage.removeItem("token");
+    this.router.navigate(['/index'])
+    window.location.reload();
   }
 
   estaLogueado(){
