@@ -79,7 +79,7 @@ export class CartComponent implements OnInit {
     totales[0].textContent = total[0].textContent
     totales[1].textContent = total[1].textContent
     const articulos = document.getElementById("numero-articulos") as HTMLElement;
-    articulos.textContent = `${JSON.parse(localStorage.getItem("producto") as string).length} Artículos)`;
+    articulos.textContent = `${JSON.parse(localStorage.getItem("producto") as string).length} Artículos`;
 
   }
 
